@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Message from './Components/Message';
+import Content from './Components/Content';
 import './App.css';
 class App extends Component {
   render() {
     return (
 
-      <Message />
+      <Content />
 
     );
   }
