@@ -7,7 +7,11 @@ const Users = () => {
         <span className='online-user-text'> Online Users</span>
       </div>
       <ul className='online-list'>
-        <li className='online-user-list'>
+        <li className='online-user-list online-search-bar'>
+          <div className="search ">
+            <input type="text" placeholder="search" />
+            <i className="fas fa-search"></i>
+          </div>
 
         </li>
         <li className="online-user-list">
@@ -15,7 +19,7 @@ const Users = () => {
           <div class="about">
             <div class="name">John Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -24,7 +28,7 @@ const Users = () => {
           <div class="about">
             <div class="name">Jane Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -33,7 +37,7 @@ const Users = () => {
           <div class="about">
             <div class="name">Ok Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -42,7 +46,7 @@ const Users = () => {
           <div class="about">
             <div class="name">No Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -51,7 +55,7 @@ const Users = () => {
           <div class="about">
             <div class="name">Yes Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -60,7 +64,7 @@ const Users = () => {
           <div class="about">
             <div class="name">YUp Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -69,7 +73,7 @@ const Users = () => {
           <div class="about">
             <div class="name">Angry Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -78,7 +82,7 @@ const Users = () => {
           <div class="about">
             <div class="name">Angry Doe</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -87,7 +91,7 @@ const Users = () => {
           <div class="about">
             <div class="name">NOPE dOE</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -96,7 +100,7 @@ const Users = () => {
           <div class="about">
             <div class="name">ok</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -105,7 +109,7 @@ const Users = () => {
           <div class="about">
             <div class="name">idk</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -114,7 +118,7 @@ const Users = () => {
           <div class="about">
             <div class="name">les</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
@@ -123,7 +127,7 @@ const Users = () => {
           <div class="about">
             <div class="name">no</div>
             <div class="status">
-              <span className='dot online'></span> online
+              <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
