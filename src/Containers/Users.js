@@ -16,117 +16,117 @@ const Users = () => {
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">John Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">John Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">Jane Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">Jane Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">Ok Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">Ok Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">No Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">No Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">Yes Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">Yes Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">YUp Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">YUp Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">Angry Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">Angry Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">Angry Doe</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">Angry Doe</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">NOPE dOE</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">NOPE dOE</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">ok</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">ok</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">idk</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">idk</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">les</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">les</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
         </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
-          <div class="about">
-            <div class="name">no</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">no</div>
+            <div className="status">
               <span className='dot online'></span> <span className='text-muted'> online</span>
             </div>
           </div>
@@ -138,9 +138,9 @@ const Users = () => {
       <div className="inner">
         <img className="avatar" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
         <div className="channels-footer-details">
-          <div class="about">
-            <div class="name">Sachin Thakur</div>
-            <div class="status">
+          <div className="about">
+            <div className="name">Sachin Thakur</div>
+            <div className="status">
               <span className='dot online'></span> online
             </div>
           </div>

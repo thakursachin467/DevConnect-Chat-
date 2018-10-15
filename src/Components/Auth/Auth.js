@@ -13,7 +13,13 @@ class Login extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    if (this.state.register) {
+      console.log('register');
+    } else {
+      console.log('login');
+    }
+
+
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
@@ -24,9 +30,9 @@ class Login extends Component {
       content = (
         <Fragment>
           <label htmlFor="username">Email</label>
-          <input className="form-styling" type="email" onChange={this.onChange.bind(this)} name="email" placeholder="" value={this.state.email} />
+          <input className="form-styling" type="email" onChange={this.onChange.bind(this)} name="email" placeholder="" value={this.state.email} required />
           <label htmlFor="password">Password</label>
-          <input className="form-styling" type="password" onChange={this.onChange.bind(this)} name="password" placeholder="" value={this.state.password} />
+          <input className="form-styling" type="password" onChange={this.onChange.bind(this)} name="password" placeholder="" value={this.state.password} required />
           <button type='submit' className="btn-signin">Sign in</button>
         </Fragment>
       )
@@ -34,13 +40,13 @@ class Login extends Component {
       content = (
         <Fragment>
           <label htmlFor="name">Name</label>
-          <input className="form-styling" type="name" onChange={this.onChange.bind(this)} name="name" placeholder="" value={this.state.name} />
+          <input className="form-styling" type="name" onChange={this.onChange.bind(this)} name="name" placeholder="" value={this.state.name} required />
           <label htmlFor="email">Email</label>
-          <input className="form-styling" type="email" onChange={this.onChange.bind(this)} name="email" placeholder="" value={this.state.email} />
+          <input className="form-styling" type="email" onChange={this.onChange.bind(this)} name="email" placeholder="" value={this.state.email} required />
           <label htmlFor="password">Password</label>
-          <input className="form-styling" type="password" onChange={this.onChange.bind(this)} name="password" placeholder="" value={this.state.password} />
+          <input className="form-styling" type="password" onChange={this.onChange.bind(this)} name="password" placeholder="" value={this.state.password} required />
           <label htmlFor="password">Re-enter password</label>
-          <input className="form-styling" type="password" onChange={this.onChange.bind(this)} name="rePassword" placeholder="" value={this.state.rePassword} />
+          <input className="form-styling" type="password" onChange={this.onChange.bind(this)} name="rePassword" placeholder="" value={this.state.rePassword} required />
           <button type='submit' className="btn-signin">Signup</button>
         </Fragment>
       )
