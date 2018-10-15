@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Content from './Components/Content';
-import Login from './Components/Auth/Login';
+import Auth from './Components/Auth/Auth';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path='/auth' component={Login} />
+          <Route exact path='/auth' component={Auth} />
           <Route exact path='/team' component={Content} />
         </Switch>
 

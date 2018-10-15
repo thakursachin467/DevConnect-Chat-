@@ -4,7 +4,7 @@ const Users = () => {
   return (
     <div className='teams '>
       <div className='online-user-box box'>
-        <span className='online-user-text'> Online Users</span>
+        <span className='online-user-text'> &nbsp;</span>
       </div>
       <ul className='online-list'>
         <li className='online-user-list online-search-bar'>
