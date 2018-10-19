@@ -12,8 +12,9 @@ app.use(bodyParser.json());
 
 //DB config
 const db = require('./config/keys').mongoURI;
+console.log(db)
 //connect to mongodb
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose.connect(db, { autoIndex: true })
   .then(() => console.log('database connected'))
   .catch((err) => console.log(err));
 

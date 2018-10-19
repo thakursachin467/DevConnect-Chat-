@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const User = require('../../models/User');
 const secret = require('../../config/keys');
+const axios = require('axios');
 
 
 //load input validation for register and login
@@ -108,6 +109,35 @@ router.post('/login', (req, res) => {
             return res.status(400).json(errors)
           }
         })
+    })
+});
+
+
+router.get('/github', (req, res) => {
+  const { query } = req;
+  const { code } = query;
+  if (!code) {
+    return res.status(400).json({
+      errors: 'Auth failed',
+      success: false
+    })
+  }
+
+  axios.post('https://github.com/login/oauth/access_token', {
+    client_id: '3641e84228dcf2c013f7',
+    client_secret: '5b80b58068b439ce2c3ab86e0e8ee9f317ecd008',
+    code: code
+  })
+    .then((res) => {
+      console.log(res.data);
+      return res.status(200).json(res.data)
+    })
+    .catch((err) => {
+      return res.status(400).json({
+        errors: 'Failed',
+        success: false
+      })
+      console.log(err)
     })
 });
 

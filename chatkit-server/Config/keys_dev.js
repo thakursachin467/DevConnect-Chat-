@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURI: "YOUR DATABASE URL",
+  mongoURI: "mongodb://admin:admin123@ds237770.mlab.com:37770/chatkit-demo",
   secretOrKey: "YOURSECRET"
 }
