@@ -6,7 +6,7 @@ const passport = require('passport');
 const User = require('../../models/User');
 const secret = require('../../config/keys');
 const axios = require('axios');
-
+const chatkit = require('../../Config/chatkit');
 
 //load input validation for register and login
 //you can create more of these validation or use lodash library for validation if your model require complex validations
@@ -20,6 +20,7 @@ const validLogin = require('../../Validation/login');
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validInput(req.body);
+  console.log(req.body);
   //check validation
   if (!isValid) {
     res.status(400).json(errors);
@@ -45,7 +46,18 @@ router.post('/register', (req, res) => {
               newUser.password = hash;
               newUser.save()
                 .then((user) => {
+
                   //this will be send as a response to the application
+                  //create a chatkit user here
+                  chatkit.createUser({
+                    id: user._id,
+                    name: user.name,
+                  })
+                    .then(() => {
+                      console.log('User created successfully');
+                    }).catch((err) => {
+                      console.log(err);
+                    });
                   const resUser = {
                     name: user.name,
                     email: user.email,
@@ -73,6 +85,7 @@ router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const { errors, isValid } = validLogin(req.body);
+  console.log(req.body);
   if (!isValid) {
     res.status(400).json(errors);
   }
@@ -116,8 +129,9 @@ router.post('/login', (req, res) => {
 router.get('/github', (req, res) => {
   const { query } = req;
   const { code } = query;
+  console.log(code)
   if (!code) {
-    return res.status(400).json({
+    res.status(400).json({
       errors: 'Auth failed',
       success: false
     })
@@ -128,12 +142,73 @@ router.get('/github', (req, res) => {
     client_secret: '5b80b58068b439ce2c3ab86e0e8ee9f317ecd008',
     code: code
   })
-    .then((res) => {
-      console.log(res.data);
-      return res.status(200).json(res.data)
+    .then((response) => {
+      console.log('access_token', response.data);
+      axios.get(`https://api.github.com/user?${response.data}`)
+        .then((userData) => {
+          const userinfo = userData.data;
+          newUser = new User(
+            {
+              name: userinfo.name,
+              email: userinfo.email,
+              githubusername: userinfo.login,
+              githubToken: userinfo.response.data,
+              avatar: userinfo.avatar_url,
+
+            }
+          )
+          User.findOne({ githubusername: userinfo.login })
+            .then((data) => {
+              if (data) {
+                const payload = {
+                  id: data.id,
+                  name: data.name,
+                  avatar: data.avatar
+                }
+                //sign token
+                jwt.sign(payload, secret.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+                  res.json({
+                    success: true,
+                    token: 'Bearer ' + token
+                  });
+                });
+              } else {
+                console.log('object', newUser)
+                newUser.save()
+                  .then((savedUser) => {
+                    console.log('object', savedUser)
+                    const payload = {
+                      id: savedUser.id,
+                      name: savedUser.name,
+                      avatar: savedUser.avatar
+                    }
+                    //sign token
+                    jwt.sign(payload, secret.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+                      res.json({
+                        success: true,
+                        token: 'Bearer ' + token
+                      });
+                    });
+                  })
+                  .catch((err) => {
+                    console.log(err)
+                    res.json({
+                      success: false,
+                      error: 'some error'
+                    })
+                  })
+              }
+
+            })
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+
     })
     .catch((err) => {
-      return res.status(400).json({
+      console.log(err)
+      res.json({
         errors: 'Failed',
         success: false
       })

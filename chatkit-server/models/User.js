@@ -13,8 +13,16 @@ const UserSchema = new Schema({
     required: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
+  },
+  githubToken: {
+    type: String
+  },
+  githubusername: {
+    type: String
+  },
+  avatar: {
+    type: String
   },
   date: {
     type: Date,

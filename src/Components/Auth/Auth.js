@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Logo from '../../img/logo2.png';
+import { Link } from 'react-router-dom'
+import axios from 'axios';
 class Login extends Component {
   state = {
     register: false,
@@ -15,8 +17,29 @@ class Login extends Component {
     e.preventDefault();
     if (this.state.register) {
       console.log('register');
+      const data = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        rePassword: this.state.rePassword
+      }
+      axios.post('api/auth/register', data);
+      this.setState({ name: '', email: '', password: '', rePassword: '' });
+      this.props.history.push('/auth');
+
     } else {
-      console.log('login');
+      const data = {
+        email: this.state.email,
+        password: this.state.password
+      }
+      axios.post('/api/auth/login', data)
+        .then((res) => {
+          this.props.history.push('/team');
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+
     }
 
 
@@ -65,7 +88,7 @@ class Login extends Component {
               {content}
             </form>
             <span className='register-span-text'>Or</span>
-            <button type='submit' className="btn-signin-github btn-signin">{this.state.register ? 'Sign up with github' : 'Sign in with github'}</button>
+            <a href='https://github.com/login/oauth/authorize?client_id=3641e84228dcf2c013f7' type='submit' className="btn-signin-github btn-signin">{this.state.register ? 'Sign up with github' : 'Sign in with github'}</a>
             <span className='register-span btn' onClick={this.onClick.bind(this)}> {this.state.register ? 'Already have an account? Signin here' : 'New to Us? Register here.'}</span>
           </div>
         </div>

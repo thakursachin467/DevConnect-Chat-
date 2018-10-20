@@ -4,11 +4,13 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const auth = require('./api/routes/auth');
+const cors = require('cors')
 const port = process.env.PORT || 5000;
 
 //body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors())
 
 //DB config
 const db = require('./config/keys').mongoURI;

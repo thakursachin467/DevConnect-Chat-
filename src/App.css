@@ -428,6 +428,9 @@ label {
 }
 
 .btn-signin-github{
+  text-decoration: none;
+  color: black;
+  text-align: center;
   width: 355px;
   background-color: grey;
 }
