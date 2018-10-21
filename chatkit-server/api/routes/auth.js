@@ -20,7 +20,7 @@ const validLogin = require('../../Validation/login');
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validInput(req.body);
-  console.log(req.body);
+
   //check validation
   if (!isValid) {
     res.status(400).json(errors);
@@ -28,6 +28,7 @@ router.post('/register', (req, res) => {
   } else {
     User.findOne({ email: req.body.email })
       .then((user) => {
+
         if (user) {
           errors.email = 'Email already exists'
           return res.status(400).json(errors)
@@ -40,13 +41,14 @@ router.post('/register', (req, res) => {
               password: req.body.password
             }
           );
+
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
               if (err) throw err;
               newUser.password = hash;
               newUser.save()
                 .then((user) => {
-
+                  console.log(user)
                   //this will be send as a response to the application
                   //create a chatkit user here
                   chatkit.createUser({

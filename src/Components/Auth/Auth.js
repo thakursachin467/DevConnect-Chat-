@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Logo from '../../img/logo2.png';
 import { Link } from 'react-router-dom'
+import jwt_decode from "jwt-decode";
 import axios from 'axios';
 class Login extends Component {
   state = {
@@ -9,10 +10,27 @@ class Login extends Component {
     password: '',
     rePassword: '',
     name: '',
+    errors: {}
   }
   onClick() {
     this.setState({ register: !this.state.register, email: '', password: '' });
   }
+
+  componentDidMount = () => {
+
+    if (localStorage.authtoken) {
+      const userData = jwt_decode(localStorage.jwttoken);
+      console.log(userData);
+      /**
+       * ? check for expired user
+       */
+      const currentTime = Date.now() / 1000;
+      if (userData.exp < currentTime) {
+        this.props.history.push('/team');
+      }
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
     if (this.state.register) {
@@ -23,9 +41,18 @@ class Login extends Component {
         password: this.state.password,
         rePassword: this.state.rePassword
       }
-      axios.post('api/auth/register', data);
-      this.setState({ name: '', email: '', password: '', rePassword: '' });
-      this.props.history.push('/auth');
+      axios.post('api/auth/register', data)
+        .then((res) => {
+          console.log(res.data);
+          this.setState({ name: '', email: '', password: '', rePassword: '', errors: {}, register: false });
+
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+          this.setState({ errors: err.response.data });
+          console.log(this.state);
+        });
+
 
     } else {
       const data = {
@@ -34,10 +61,16 @@ class Login extends Component {
       }
       axios.post('/api/auth/login', data)
         .then((res) => {
+          this.setState({ email: '', password: '', errors: {} });
+          //save token to local storage
+          const { token } = res.data;
+          //set token local storage
+          localStorage.setItem("authtoken", token);
           this.props.history.push('/team');
         })
         .catch((err) => {
-          console.log(err);
+          this.setState({ errors: err.response.data });
+          console.log(this.state);
         })
 
     }
