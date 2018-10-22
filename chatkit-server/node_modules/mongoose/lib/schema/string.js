@@ -1,12 +1,16 @@
+'use strict';
+
 /*!
  * Module dependencies.
  */
 
-var SchemaType = require('../schematype');
-var CastError = SchemaType.CastError;
-var MongooseError = require('../error');
-var utils = require('../utils');
-var Document;
+const SchemaType = require('../schematype');
+const CastError = SchemaType.CastError;
+const MongooseError = require('../error');
+const castString = require('../cast/string');
+const utils = require('../utils');
+
+let Document;
 
 /**
  * String SchemaType constructor.
@@ -124,12 +128,7 @@ SchemaString.prototype.enum = function() {
  *     var M = db.model('M', s);
  *     var m = new M({ email: 'SomeEmail@example.COM' });
  *     console.log(m.email) // someemail@example.com
- *
- * NOTE: Setters do not run on queries by default. Use the `runSettersOnQuery` option:
- *
- *      // Must use `runSettersOnQuery` as shown below, otherwise `email` will
- *      // **not** be lowercased.
- *      M.updateOne({}, { $set: { email: 'SomeEmail@example.COM' } }, { runSettersOnQuery: true });
+ *     M.find({ email: 'SomeEmail@example.com' }); // Queries by 'someemail@example.com'
  *
  * @api public
  * @return {SchemaType} this
@@ -159,12 +158,7 @@ SchemaString.prototype.lowercase = function(shouldApply) {
  *     var M = db.model('M', s);
  *     var m = new M({ caps: 'an example' });
  *     console.log(m.caps) // AN EXAMPLE
- *
- * NOTE: Setters do not run on queries by default. Use the `runSettersOnQuery` option:
- *
- *      // Must use `runSettersOnQuery` as shown below, otherwise `email` will
- *      // **not** be lowercased.
- *      M.updateOne({}, { $set: { email: 'SomeEmail@example.COM' } }, { runSettersOnQuery: true });
+ *     M.find({ caps: 'an example' }) // Matches documents where caps = 'AN EXAMPLE'
  *
  * @api public
  * @return {SchemaType} this
@@ -198,12 +192,6 @@ SchemaString.prototype.uppercase = function(shouldApply) {
  *     console.log(string.length) // 11
  *     var m = new M({ name: string })
  *     console.log(m.name.length) // 9
- *
- * NOTE: Setters do not run on queries by default. Use the `runSettersOnQuery` option:
- *
- *      // Must use `runSettersOnQuery` as shown below, otherwise `email` will
- *      // **not** be lowercased.
- *      M.updateOne({}, { $set: { email: 'SomeEmail@example.COM' } }, { runSettersOnQuery: true });
  *
  * @api public
  * @return {SchemaType} this
@@ -381,8 +369,8 @@ SchemaString.prototype.match = function match(regExp, message) {
     }
 
     var ret = ((v != null && v !== '')
-        ? regExp.test(v)
-        : true);
+      ? regExp.test(v)
+      : true);
     return ret;
   };
 
@@ -454,26 +442,7 @@ SchemaString.prototype.cast = function(value, doc, init) {
     return ret;
   }
 
-  // If null or undefined
-  if (value === null || value === undefined) {
-    return value;
-  }
-
-  if (typeof value !== 'undefined') {
-    // handle documents being passed
-    if (value._id && typeof value._id === 'string') {
-      return value._id;
-    }
-
-    // Re: gh-647 and gh-3030, we're ok with casting using `toString()`
-    // **unless** its the default Object.toString, because "[object Object]"
-    // doesn't really qualify as useful data
-    if (value.toString && value.toString !== Object.prototype.toString) {
-      return value.toString();
-    }
-  }
-
-  throw new CastError('string', value, this.path);
+  return castString(value, this.path);
 };
 
 /*!

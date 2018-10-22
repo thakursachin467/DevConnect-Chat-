@@ -19,7 +19,7 @@ class Login extends Component {
   componentDidMount = () => {
 
     if (localStorage.authtoken) {
-      const userData = jwt_decode(localStorage.jwttoken);
+      const userData = jwt_decode(localStorage.authtoken);
       console.log(userData);
       /**
        * ? check for expired user

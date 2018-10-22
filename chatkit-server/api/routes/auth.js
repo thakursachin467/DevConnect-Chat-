@@ -20,15 +20,15 @@ const validLogin = require('../../Validation/login');
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validInput(req.body);
-
+  console.log(req.body)
   //check validation
   if (!isValid) {
     res.status(400).json(errors);
 
   } else {
-    User.findOne({ email: req.body.email })
+    let query = User.findOne({ email: req.body.email })
       .then((user) => {
-
+        console.log('object')
         if (user) {
           errors.email = 'Email already exists'
           return res.status(400).json(errors)
@@ -99,7 +99,7 @@ router.post('/login', (req, res) => {
         errors.email = 'user not found'
         res.status(404).json(errors)
       }
-
+      console.log(user)
       //check password
       bcrypt.compare(password, user.password)
         .then((isMatch) => {
@@ -216,6 +216,16 @@ router.get('/github', (req, res) => {
       })
       console.log(err)
     })
+});
+
+
+router.post('/authenticate', (req, res) => {
+  const authData = chatkit.authenticate({
+    userId: req.query.user_id
+  });
+
+  res.status(authData.status)
+    .send(authData.body);
 });
 
 

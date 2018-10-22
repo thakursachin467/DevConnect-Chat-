@@ -14,9 +14,8 @@ app.use(cors())
 
 //DB config
 const db = require('./config/keys').mongoURI;
-console.log(db)
 //connect to mongodb
-mongoose.connect(db, { autoIndex: true })
+mongoose.connect(db, { useNewUrlParser: true })
   .then(() => console.log('database connected'))
   .catch((err) => console.log(err));
 
