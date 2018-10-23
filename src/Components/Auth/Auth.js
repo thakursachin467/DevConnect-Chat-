@@ -10,6 +10,7 @@ class Login extends Component {
     password: '',
     rePassword: '',
     name: '',
+    username: '',
     errors: {}
   }
   onClick() {
@@ -97,6 +98,8 @@ class Login extends Component {
         <Fragment>
           <label htmlFor="name">Name</label>
           <input className="form-styling" type="name" onChange={this.onChange.bind(this)} name="name" placeholder="" value={this.state.name} required />
+          <label htmlFor="email">Username</label>
+          <input className="form-styling" type="username" onChange={this.onChange.bind(this)} name="username" placeholder="" value={this.state.username} required />
           <label htmlFor="email">Email</label>
           <input className="form-styling" type="email" onChange={this.onChange.bind(this)} name="email" placeholder="" value={this.state.email} required />
           <label htmlFor="password">Password</label>

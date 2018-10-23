@@ -38,7 +38,8 @@ router.post('/register', (req, res) => {
             {
               name: req.body.name,
               email: req.body.email,
-              password: req.body.password
+              password: req.body.password,
+              githubusername: req.body.username
             }
           );
 
@@ -142,19 +143,21 @@ router.get('/github', (req, res) => {
   axios.post('https://github.com/login/oauth/access_token', {
     client_id: '3641e84228dcf2c013f7',
     client_secret: '5b80b58068b439ce2c3ab86e0e8ee9f317ecd008',
-    code: code
+    code: code,
+    scope: 'repo'
   })
     .then((response) => {
       console.log('access_token', response.data);
       axios.get(`https://api.github.com/user?${response.data}`)
         .then((userData) => {
+          console.log(userData)
           const userinfo = userData.data;
           newUser = new User(
             {
               name: userinfo.name,
               email: userinfo.email,
               githubusername: userinfo.login,
-              githubToken: userinfo.response.data,
+              githubToken: response.data,
               avatar: userinfo.avatar_url,
 
             }

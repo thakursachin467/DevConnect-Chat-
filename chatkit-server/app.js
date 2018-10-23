@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const auth = require('./api/routes/auth');
+const rooms = require('./api/routes/rooms');
 const cors = require('cors')
 const port = process.env.PORT || 5000;
 
@@ -27,6 +28,7 @@ require('./config/passport')(passport);
 
 //API ROUTES 
 app.use('/api/auth', auth);
+app.use('/api/room', rooms);
 
 //YOU CAN CREATE MORE API ROUTES HERE
 

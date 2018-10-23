@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
+import jwt_decode from "jwt-decode";
 class GitLogin extends Component {
   state = {
     loading: true
@@ -10,6 +10,9 @@ class GitLogin extends Component {
   componentDidMount() {
     axios.get(`/api/auth/github${this.props.location.search}`)
       .then((res) => {
+        const { token } = res.data;
+        //set token local storage
+        localStorage.setItem("authtoken", token);
         this.setState({ loading: false })
       })
       .catch((err) => {

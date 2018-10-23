@@ -3,17 +3,14 @@ import React from 'react'
 const Users = () => {
   return (
     <div className='teams '>
-      <div className='online-user-box box'>
-        <span className='online-user-text'> &nbsp;</span>
+      <div className='online-user-box '>
+        <div className="search ">
+          <input type="text" placeholder="search" />
+          <i className="fas fa-search"></i>
+        </div>
+
       </div>
       <ul className='online-list'>
-        <li className='online-user-list online-search-bar'>
-          <div className="search ">
-            <input type="text" placeholder="search" />
-            <i className="fas fa-search"></i>
-          </div>
-
-        </li>
         <li className="online-user-list">
           <img className="avatar-online" alt="Avatar" src="https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6" />
           <div className="about">

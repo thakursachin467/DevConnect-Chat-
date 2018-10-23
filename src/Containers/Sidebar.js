@@ -7,7 +7,7 @@ const Sidebar = () => {
         All Teams
   </div>
       <ul className='channel-list box-channel'>
-        <li> hello</li>
+        <li> Add New Team</li>
         <li></li>
         <li></li>
         <li></li>
