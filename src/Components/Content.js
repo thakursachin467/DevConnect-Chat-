@@ -7,6 +7,9 @@ import Input from '../Containers/InputBox';
 import { ChatManager, TokenProvider } from '@pusher/chatkit'
 
 class Content extends Component {
+  state = {
+    currentUser: {}
+  }
   componentDidMount() {
     const chatManager = new ChatManager({
       instanceLocator: 'v1:us1:3dd62a71-d604-4985-bbb9-5965ea8bb128',
@@ -16,6 +19,7 @@ class Content extends Component {
     chatManager
       .connect()
       .then(currentUser => {
+        this.setState({ currentUser: currentUser })
         console.log('Successful connection', currentUser)
       })
       .catch(err => {
@@ -27,7 +31,7 @@ class Content extends Component {
     return (
       <div className='app-layout'>
         <User />
-        <Sidebar />
+        <Sidebar currentUser={this.state.currentUser} />
         <Header
           teamName='Team Name goes here(currently active)'
         />
