@@ -6,20 +6,47 @@ class InputBox extends React.Component {
     this.state = {
       text: '',
       user: '',
-      roomId: '',
-      currentUser: {}
     }
   }
 
   componentDidMount() {
-    this.setState({ currentUser: this.props.currentUser, roomId: this.props.roomId, user: this.props.user });
+    console.log('roomId', this.props.roomId)
+    this.setState({ currentUser: this.props.currentUser, user: this.props.user });
 
   }
+  onSubmit(e) {
+    e.preventDefault()
+    const { text } = this.state;
+    const { roomId, currentUser } = this.props;
+    currentUser.sendMessage({
+      text: text,
+      roomId: roomId
+    })
+      .then(messageId => {
+        this.setState({ text: '' })
+        console.log(`Added message to ${roomId.name}`)
+      })
+      .catch(err => {
+        console.log(`Error adding message to ${roomId.name}: ${err}`)
+      })
+
+  }
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
   render() {
-    console.log(this.state)
     return (
       <div className='input box message'>
-        <Input type='text' placeholder='Start Chatting' />
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <input
+            type='text'
+            placeholder='Start Chatting'
+            name='text'
+            value={this.state.text}
+            onChange={this.onChange.bind(this)}
+          />
+        </form>
+
       </div>
     )
   }

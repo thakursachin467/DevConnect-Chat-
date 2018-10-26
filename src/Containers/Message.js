@@ -6,7 +6,7 @@ const Message = (props) => {
     loading = false;
   }
   if (loading) {
-    return (<div>Loading......</div>)
+    return (<div className="lds-hourglass" style={{ alignSelf: 'center', margin: 'auto' }}></div>)
   }
   const calendarStrings = {
     lastDay: '[Yesterday at] LT',

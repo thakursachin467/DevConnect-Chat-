@@ -55,8 +55,9 @@ class App extends Component {
         <Switch>
           <Route exact path='/auth' component={Auth} />
           <Route exact path='/auth/github' component={GitLogin} />
-          <Route exact path='/team' render={props => <Content currentUser={this.state.currentUser} />} />
-          { /*<PrivateRoute exact path='/team' isAuthanticated={this.state.authorize} currentUser={this.state.currentUser} component={Content} /> */}
+
+          <PrivateRoute exact path='/team' isAuthanticated={this.state.authorize} currentUser={this.state.currentUser} component={Content} />
+          <PrivateRoute exact path='/team/:id' isAuthanticated={this.state.authorize} currentUser={this.state.currentUser} component={Content} />
         </Switch>
 
       </BrowserRouter>
