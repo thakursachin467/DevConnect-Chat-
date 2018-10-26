@@ -7,19 +7,35 @@ import Input from '../Containers/InputBox';
 import { ChatManager, TokenProvider } from '@pusher/chatkit'
 
 class Content extends Component {
-  state = {
-    currentUser: {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentUser: {},
+      Messages: []
+    }
   }
+
   componentDidMount() {
     const chatManager = new ChatManager({
       instanceLocator: 'v1:us1:3dd62a71-d604-4985-bbb9-5965ea8bb128',
       userId: this.props.currentUser,
       tokenProvider: new TokenProvider({ url: '/api/auth/authenticate' })
-    })
+    });
+
     chatManager
       .connect()
       .then(currentUser => {
         this.setState({ currentUser: currentUser })
+        currentUser.subscribeToRoom({
+          roomId: 19371505,
+          hooks: {
+            onNewMessage: message => {
+              this.setState({
+                Messages: [...this.state.Messages, message]
+              })
+            }
+          }
+        })
         console.log('Successful connection', currentUser)
       })
       .catch(err => {
@@ -28,6 +44,7 @@ class Content extends Component {
   }
 
   render() {
+    console.log(this.state.Messages);
     return (
       <div className='app-layout'>
         <User />
@@ -35,8 +52,12 @@ class Content extends Component {
         <Header
           teamName='Team Name goes here(currently active)'
         />
-        <Message />
-        <Input />
+        <Message message={this.state.Messages} User={this.props.currentUser} />
+        <Input
+          user={this.props.currentUser}
+          currentUser={this.state.currentUser}
+          roomId={19371505}
+        />
       </div>
     )
   }

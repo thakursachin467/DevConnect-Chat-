@@ -14,9 +14,8 @@ class Sidebar extends Component {
     currentUser.createRoom({
       name: 'general',
       private: true,
-      addUserIds: ['craig', 'kate']
     }).then(room => {
-      console.log(`Created room called ${room.name}`)
+      console.log(`Created room called ${room}`)
     })
       .catch(err => {
         console.log(`Error creating room ${err}`)

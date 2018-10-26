@@ -113,7 +113,7 @@ router.post('/login', (req, res) => {
             } //created jwt payload
 
             //sign token
-            jwt.sign(payload, secret.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+            jwt.sign(payload, secret.secretOrKey, { expiresIn: 360000 }, (err, token) => {
               res.json({
                 success: true,
                 token: 'Bearer ' + token
@@ -171,7 +171,7 @@ router.get('/github', (req, res) => {
                   avatar: data.avatar
                 }
                 //sign token
-                jwt.sign(payload, secret.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+                jwt.sign(payload, secret.secretOrKey, { expiresIn: 360000 }, (err, token) => {
                   res.json({
                     success: true,
                     token: 'Bearer ' + token
@@ -181,14 +181,24 @@ router.get('/github', (req, res) => {
                 console.log('object', newUser)
                 newUser.save()
                   .then((savedUser) => {
-                    console.log('object', savedUser)
+                    //create a user in chatkit
+                    chatkit.createUser({
+                      id: savedUser.githubusername,
+                      name: savedUser.name,
+                      avatarURL: savedUser.avatar
+                    })
+                      .then(() => {
+                        console.log('User created successfully');
+                      }).catch((err) => {
+                        console.log(err);
+                      });
                     const payload = {
                       id: savedUser.id,
                       name: savedUser.name,
                       avatar: savedUser.avatar
                     }
                     //sign token
-                    jwt.sign(payload, secret.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+                    jwt.sign(payload, secret.secretOrKey, { expiresIn: 360000 }, (err, token) => {
                       res.json({
                         success: true,
                         token: 'Bearer ' + token
