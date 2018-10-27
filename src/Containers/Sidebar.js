@@ -32,7 +32,10 @@ class Sidebar extends Component {
     if (rooms.length > 0) {
       room = rooms.map(room => {
         return <Link key={room.id} to={`/team/${room.id}`} style={{ textDecoration: 'none', color: 'white' }}>
-          <li >{room.name}</li>
+          <li
+            onClick={() => { this.props.subscribeToRoom(room.id, room) }}>
+            {room.name}
+          </li>
         </Link>
 
 

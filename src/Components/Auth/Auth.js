@@ -67,7 +67,7 @@ class Login extends Component {
           const { token } = res.data;
           //set token local storage
           localStorage.setItem("authtoken", token);
-          this.props.history.push('/team');
+          window.location.href('/team');
         })
         .catch((err) => {
           this.setState({ errors: err.response.data });

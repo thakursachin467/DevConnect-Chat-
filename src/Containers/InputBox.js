@@ -10,7 +10,6 @@ class InputBox extends React.Component {
   }
 
   componentDidMount() {
-    console.log('roomId', this.props.roomId)
     this.setState({ currentUser: this.props.currentUser, user: this.props.user });
 
   }
