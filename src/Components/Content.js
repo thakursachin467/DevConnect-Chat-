@@ -36,6 +36,9 @@ class Content extends Component {
     } else {
       if (hasRooms) {
         const index = _.findIndex(rooms, room => room.id == this.props.match.params.id);
+        if (index == -1) {
+          return window.location.href('/team');
+        }
         currenTeam = rooms[index];
         this.setState({ currentRoom: currenTeam });
         return true;
@@ -140,21 +143,28 @@ class Content extends Component {
                 <img src={Placeholder} height='250px' width='250px' style={{ marginLeft: '50%', marginRight: 'auto', display: 'block', marginTop: '24%' }} />
                 <h3 style={{ marginLeft: '60%', marginRight: 'auto', display: 'block', marginTop: '2%' }} >Or</h3>
                 <Button
+                  className='joinTeamBtn'
                   onClick={this.onJoinTeamClick.bind(this)}
-                  style={{ marginLeft: '50%', marginRight: 'auto', display: 'block', marginTop: '2%', backgroundColor: 'green', color: 'white', padding: '20px 80px', borderRadius: '8px', cursor: 'pointer' }} >
+                >
                   Join a team
                 </Button>
               </div>
             )
         }
 
+        {
+          this.state.currentUser.name ? (
+            <Sidebar
+              subscribeToRoom={this.subscribeToRoom}
+              currentUser={this.state.currentUser}
+              rooms={this.state.rooms}
+              updateRoomList={this.updateRoomList.bind(this)}
+            />
+          ) : (
+              <div>Please join a team</div>
+            )
+        }
 
-        <Sidebar
-          subscribeToRoom={this.subscribeToRoom}
-          currentUser={this.state.currentUser}
-          rooms={this.state.rooms}
-          updateRoomList={this.updateRoomList.bind(this)}
-        />
 
 
 

@@ -7,7 +7,8 @@ const Header = (props) => {
     <div className='header box'>{
       team.name ? team.name : 'Join a Team'
 
-    }</div>
+    }
+    </div>
   )
 }
 

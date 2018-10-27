@@ -4,7 +4,7 @@ class InputBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
+      message: '',
       user: '',
     }
   }
@@ -15,14 +15,14 @@ class InputBox extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault()
-    const { text } = this.state;
+    const { message } = this.state;
     const { roomId, currentUser } = this.props;
     currentUser.sendMessage({
-      text: text,
+      text: message,
       roomId: roomId
     })
       .then(messageId => {
-        this.setState({ text: '' })
+        this.setState({ message: '' })
         console.log(`Added message to ${roomId.name}`)
       })
       .catch(err => {
@@ -40,8 +40,9 @@ class InputBox extends React.Component {
           <input
             type='text'
             placeholder='Start Chatting'
-            name='text'
-            value={this.state.text}
+            name='message'
+            autoComplete="off"
+            value={this.state.message}
             onChange={this.onChange.bind(this)}
           />
         </form>

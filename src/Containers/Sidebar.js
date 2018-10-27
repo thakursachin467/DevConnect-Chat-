@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 class Sidebar extends Component {
   constructor(props) {
     super(props);
@@ -31,12 +31,17 @@ class Sidebar extends Component {
     let room = (<div>Loading rooms</div>);
     if (rooms.length > 0) {
       room = rooms.map(room => {
-        return <Link key={room.id} to={`/team/${room.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+        return <NavLink
+          key={room.id}
+          to={`/team/${room.id}`}
+          style={{ textDecoration: 'none', color: 'white' }}
+          activeClassName='active'
+        >
           <li
             onClick={() => { this.props.subscribeToRoom(room.id, room) }}>
             {room.name}
           </li>
-        </Link>
+        </NavLink>
 
 
       })
@@ -47,15 +52,14 @@ class Sidebar extends Component {
           All Teams
       </div>
         <ul className='channel-list box-channel'>
-          <li style={{ cursor: 'pointer' }} onClick={this.onCreateClick.bind(this)}>
-            Create a Team
-            </li>
           {
             room
           }
 
-
         </ul>
+        <div style={{ cursor: 'pointer' }} onClick={this.onCreateClick.bind(this)} className='inner-team'>
+          <span>Add a Team</span>
+        </div>
       </div>
     )
   }
