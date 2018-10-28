@@ -1,5 +1,4 @@
 import React from 'react'
-import { Input } from 'semantic-ui-react'
 class InputBox extends React.Component {
   constructor(props) {
     super(props);

@@ -142,12 +142,12 @@ class Content extends Component {
               <div>
                 <img src={Placeholder} height='250px' width='250px' style={{ marginLeft: '50%', marginRight: 'auto', display: 'block', marginTop: '24%' }} />
                 <h3 style={{ marginLeft: '60%', marginRight: 'auto', display: 'block', marginTop: '2%' }} >Or</h3>
-                <Button
+                <button
                   className='joinTeamBtn'
                   onClick={this.onJoinTeamClick.bind(this)}
                 >
                   Join a team
-                </Button>
+                </button>
               </div>
             )
         }
