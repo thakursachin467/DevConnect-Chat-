@@ -1,15 +1,30 @@
 import React from 'react'
-import { Modal, Button, Divider, Grid, Header, Icon, Search, Segment, Content } from 'semantic-ui-react'
+import { Modal, Button, Divider, Grid, Header, Icon, Segment, Form, Input } from 'semantic-ui-react'
 
 class ModalModalExample extends React.Component {
   constructor() {
     super()
     this.state = {
       createTeam: false,
-      joinTeam: false
+      joinTeam: false,
+      team: ''
     }
     this.joinTeam = this.joinTeam.bind(this);
     this.createTeam = this.createTeam.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  onSubmit(e) {
+    e.preventDefault()
+    this.props.createTeam(this.state.team);
+    this.setState({ team: ' ' });
+    this.createTeam();
+    this.props.close();
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   joinTeam() {
@@ -23,9 +38,48 @@ class ModalModalExample extends React.Component {
     let content;
     const { createTeam, joinTeam } = this.state;
     if (createTeam | joinTeam) {
-      content = (
-        <div>this</div>
-      )
+      if (createTeam) {
+        content = (
+          <React.Fragment>
+            <Modal.Content style={{ height: '30%' }}>
+              <Form
+                onSubmit={this.onSubmit}
+                style={{ width: '100%', marginLeft: 'auto', marginRight: 'auto' }}
+                size='large'
+              >
+                <Form.Field
+                  width={16}
+                  required>
+                  <label>Team Name</label>
+                  <Input
+                    name='team'
+                    value={this.state.team}
+                    onChange={this.onChange}
+                    placeholder='Team Name' />
+                </Form.Field>
+              </Form>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button
+                icon='cancel'
+                labelPosition='right'
+                content='Go back'
+                color='black'
+                onClick={this.createTeam} />
+
+              <Button
+                positive
+                icon='checkmark'
+                labelPosition='right'
+                content="Create"
+                onClick={this.onSubmit}
+              />
+            </Modal.Actions>
+          </React.Fragment>
+
+
+        )
+      }
     } else {
       /* content = (
          <Button.Group >
@@ -35,53 +89,45 @@ class ModalModalExample extends React.Component {
          </Button.Group>
        ) */
       content = (
-        <Segment size='large' style={{ height: '100%' }}>
-          <Grid columns={2} textAlign='center'>
-            <Divider vertical>Or</Divider>
-            <Grid.Row verticalAlign='middle'>
-              <Grid.Column>
-                <Header icon style={{ backgroundColor: 'white' }}>
-                  <Icon name='user' />
-                  <p style={{ fontWeight: '200', fontSize: '12' }}>Create a team and invite your friends. it's free </p>
-                  <Button size='large' onClick={this.createTeam}>Create a Team</Button>
+        <React.Fragment>
+          <Modal.Content style={{ height: '70%' }}>
+            <Segment size='large' style={{ height: '100%' }} raised>
+              <Grid columns={2} textAlign='center'>
+                <Divider vertical>Or</Divider>
+                <Grid.Row verticalAlign='middle'>
+                  <Grid.Column onClick={this.createTeam} style={{ cursor: 'pointer' }} >
+                    <Header icon style={{ backgroundColor: 'white' }}>
+                      <Icon name='user' />
+                      <p style={{ fontWeight: '200', fontSize: '12' }}>Create a team and invite your friends. it's free </p>
+                      <Button size='large' onClick={this.createTeam}>Create a Team</Button>
+                    </Header>
+                  </Grid.Column>
+                  <Grid.Column onClick={this.joinTeam} style={{ cursor: 'pointer' }}>
+                    <Header icon style={{ backgroundColor: 'white' }}>
+                      <Icon name='users' />
+                      <p style={{ fontWeight: '200' }}>Enter an invite code and instantly join your friends team.</p>
+                      <Button positive size='large' onClick={this.joinTeam}> Join a Team</Button>
+                    </Header>
 
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Segment>
+          </Modal.Content>
+        </React.Fragment>
 
-                </Header>
-
-
-              </Grid.Column>
-              <Grid.Column>
-                <Header icon style={{ backgroundColor: 'white' }}>
-                  <Icon name='users' />
-                  <p style={{ fontWeight: '200' }}>Enter an invite code and instantly join your friends team.</p>
-                  <Button positive size='large' onClick={this.joinTeam}> Join a Team</Button>
-                </Header>
-
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment>
       )
     }
+
+
     return (
       <Modal open={this.props.open} onClose={this.props.close} size='small' style={{ height: '65%' }}>
         <Header style={{ textAlign: 'center', borderBottom: '0px solid white' }}>Please choose an option</Header>
-        <Modal.Content style={{ height: '70%' }}>
-          {content}
-        </Modal.Content>
 
-        <Modal.Actions>
-          <Button color='black' onClick={this.joinTeam}>
-            Go back
-            </Button>
-          <Button
-            positive
-            icon='checkmark'
-            labelPosition='right'
-            content="Create"
-            onClick={this.joinTeam}
-          />
-        </Modal.Actions>
+        {content}
+
+
+
       </Modal>
     )
   }

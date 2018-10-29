@@ -12,9 +12,8 @@ class Sidebar extends Component {
 
 
 
-  onCreateClick() {
+  /*onCreateClick() {
     const { currentUser, updateRoomList } = this.props;
-    console.log(updateRoomList)
     currentUser.createRoom({
       name: 'new sachin',
       private: true,
@@ -25,7 +24,7 @@ class Sidebar extends Component {
       .catch(err => {
         console.log(`Error creating room ${err}`)
       })
-  }
+  } */
 
   render() {
     const { rooms } = this.props;

@@ -28,6 +28,7 @@ class Content extends Component {
     this.initialLoad = this.initialLoad.bind(this);
     this.modalOpenSetting = this.modalOpenSetting.bind(this);
     this.openAddTeamModal = this.openAddTeamModal.bind(this);
+    this.createTeam = this.createTeam.bind(this);
   }
   updateRoomList() {
     this.setState({ rooms: [...this.state.currentUser.rooms] });
@@ -51,6 +52,22 @@ class Content extends Component {
       }
     }
     return false;
+
+  }
+
+  createTeam(teamName) {
+    console.log(teamName);
+    const { currentUser } = this.state;
+    currentUser.createRoom({
+      name: teamName,
+      private: true,
+    }).then(room => {
+      console.log(`Created room called ${currentUser.rooms}`)
+      this.updateRoomList();
+    })
+      .catch(err => {
+        console.log(`Error creating room ${err}`)
+      })
 
   }
 
@@ -89,6 +106,7 @@ class Content extends Component {
 
   onJoinTeamClick() {
     console.log('object');
+
   }
 
   getPublicRooms() {
@@ -130,6 +148,7 @@ class Content extends Component {
     return (
       <div className='app-layout'>
         <TeamModal
+          createTeam={this.createTeam}
           open={this.state.openAddTeamModal}
           close={this.openAddTeamModal}
         />
