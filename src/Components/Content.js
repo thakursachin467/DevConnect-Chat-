@@ -8,7 +8,8 @@ import { ChatManager, TokenProvider } from '@pusher/chatkit'
 import _ from 'lodash';
 import Loader from '../Common/Loading';
 import Placeholder from '../img/placeholder.png';
-import { Button } from 'semantic-ui-react'
+import SettingModal from '../Common/SettingModal';
+import TeamModal from '../Common/TeamModal';
 class Content extends Component {
   constructor(props) {
     super(props)
@@ -18,11 +19,15 @@ class Content extends Component {
       rooms: [],
       hasRooms: false,
       placeHolder: ['Grab Your Coffee', 'Compiling your code', 'Fixing errors', 'Loading your content', 'Debugging your code', 'Logging the console', 'Configuration files', 'Committing your changes', 'Connecting to the community', 'Brewing some coffee', 'Installing caffeine'],
-      currentRoom: {}
+      currentRoom: {},
+      openSettingModal: false,
+      openAddTeamModal: false
     }
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getPublicRooms.bind(this);
     this.initialLoad = this.initialLoad.bind(this);
+    this.modalOpenSetting = this.modalOpenSetting.bind(this);
+    this.openAddTeamModal = this.openAddTeamModal.bind(this);
   }
   updateRoomList() {
     this.setState({ rooms: [...this.state.currentUser.rooms] });
@@ -72,6 +77,16 @@ class Content extends Component {
       })
   }
 
+
+  modalOpenSetting() {
+    this.setState({ openSettingModal: !this.state.openSettingModal });
+
+  }
+
+  openAddTeamModal() {
+    this.setState({ openAddTeamModal: !this.state.openAddTeamModal });
+  }
+
   onJoinTeamClick() {
     console.log('object');
   }
@@ -114,7 +129,14 @@ class Content extends Component {
 
     return (
       <div className='app-layout'>
-
+        <TeamModal
+          open={this.state.openAddTeamModal}
+          close={this.openAddTeamModal}
+        />
+        <SettingModal
+          open={this.state.openSettingModal}
+          close={this.modalOpenSetting}
+        />
         {
           currentRoom.name ?
             <React.Fragment>
@@ -159,6 +181,8 @@ class Content extends Component {
               currentUser={this.state.currentUser}
               rooms={this.state.rooms}
               updateRoomList={this.updateRoomList.bind(this)}
+              modalOpenSetting={this.modalOpenSetting}
+              openAddTeamModal={this.openAddTeamModal}
             />
           ) : (
               <div>Please join a team</div>

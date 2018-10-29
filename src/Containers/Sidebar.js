@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
 class Sidebar extends Component {
   constructor(props) {
     super(props);
@@ -37,10 +38,15 @@ class Sidebar extends Component {
           style={{ textDecoration: 'none', color: 'white' }}
           activeClassName='active'
         >
-          <li
-            onClick={() => { this.props.subscribeToRoom(room.id, room) }}>
-            {room.name}
-          </li>
+          <div >
+            <li onClick={() => { this.props.subscribeToRoom(room.id, room) }}>
+              {room.name}
+              <span onClick={() => this.props.modalOpenSetting()} className='setting'><Icon name='setting' className='settingIcon' /></span>
+            </li>
+
+          </div>
+
+
         </NavLink>
 
 
@@ -57,7 +63,7 @@ class Sidebar extends Component {
           }
 
         </ul>
-        <div style={{ cursor: 'pointer' }} onClick={this.onCreateClick.bind(this)} className='inner-team'>
+        <div style={{ cursor: 'pointer' }} onClick={this.props.openAddTeamModal} className='inner-team'>
           <span>Add a Team</span>
         </div>
       </div>

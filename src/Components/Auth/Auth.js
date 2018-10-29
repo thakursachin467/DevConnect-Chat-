@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Logo from '../../img/logo2.png';
-import { Link } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
+import { Button, Icon } from 'semantic-ui-react'
 import axios from 'axios';
 class Login extends Component {
   state = {
@@ -124,7 +124,10 @@ class Login extends Component {
               {content}
             </form>
             <span className='register-span-text'>Or</span>
-            <a href='https://github.com/login/oauth/authorize?client_id=3641e84228dcf2c013f7' type='submit' className="btn-signin-github btn-signin">{this.state.register ? 'Sign up with github' : 'Sign in with github'}</a>
+            <a href='https://github.com/login/oauth/authorize?client_id=3641e84228dcf2c013f7'
+              className="btn-signin-github ">
+              <Icon name='github' />
+              {this.state.register ? 'Sign up with github' : 'Sign in with github'}</a>
             <span className='register-span btn' onClick={this.onClick.bind(this)}> {this.state.register ? 'Already have an account? Signin here' : 'New to Us? Register here.'}</span>
           </div>
         </div>
