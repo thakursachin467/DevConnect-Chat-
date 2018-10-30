@@ -8,7 +8,7 @@ class GitLogin extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/auth/github${this.props.location.search}`)
+    axios.get(`https://ancient-temple-53657.herokuapp.com/api/auth/github${this.props.location.search}`)
       .then((res) => {
         const { token } = res.data;
         //set token local storage

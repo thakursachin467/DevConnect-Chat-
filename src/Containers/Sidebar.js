@@ -62,10 +62,16 @@ class Sidebar extends Component {
           }
 
         </ul>
-        <div style={{ cursor: 'pointer' }} onClick={this.props.openAddTeamModal} className='inner-team'>
-          <span>Add a Team</span>
+        <li style={{ listStyleType: 'none' }}></li>
+        <li style={{ listStyleType: 'none' }}></li>
+        <li style={{ listStyleType: 'none' }}></li>
+        <div className='inner-team' style={{ marginTop: '12px' }}>
+          <div style={{ cursor: 'pointer' }} onClick={this.props.openAddTeamModal} className='inner-team-btn'>
+            <span>Add a Team</span>
+          </div>
         </div>
-      </div>
+
+      </div >
     )
   }
 

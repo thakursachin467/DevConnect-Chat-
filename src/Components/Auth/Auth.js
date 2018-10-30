@@ -18,14 +18,14 @@ class Login extends Component {
   }
 
   componentDidMount = () => {
-
+    console.log('component did mount[Auth]')
     if (localStorage.authtoken) {
       const userData = jwt_decode(localStorage.authtoken);
-      console.log(userData);
+
       /**
        * ? check for expired user
        */
-      const currentTime = Date.now() / 1000;
+      const currentTime = Date.now();
       if (userData.exp < currentTime) {
         this.props.history.push('/team');
       }
@@ -42,7 +42,7 @@ class Login extends Component {
         password: this.state.password,
         rePassword: this.state.rePassword
       }
-      axios.post('api/auth/register', data)
+      axios.post('https://ancient-temple-53657.herokuapp.com/api/auth/register', data)
         .then((res) => {
           console.log(res.data);
           this.setState({ name: '', email: '', password: '', rePassword: '', errors: {}, register: false });
@@ -60,7 +60,7 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       }
-      axios.post('/api/auth/login', data)
+      axios.post('https://ancient-temple-53657.herokuapp.com/api/auth/login', data)
         .then((res) => {
           this.setState({ email: '', password: '', errors: {} });
           //save token to local storage

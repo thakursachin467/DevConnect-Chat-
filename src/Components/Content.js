@@ -75,11 +75,24 @@ class Content extends Component {
     const chatManager = new ChatManager({
       instanceLocator: 'v1:us1:3dd62a71-d604-4985-bbb9-5965ea8bb128',
       userId: this.props.currentUser,
-      tokenProvider: new TokenProvider({ url: '/api/auth/authenticate' })
+      tokenProvider: new TokenProvider({ url: 'https://ancient-temple-53657.herokuapp.com/api/auth/authenticate' })
     });
 
     chatManager
-      .connect()
+      .connect({
+        onAddedToRoom: room => {
+          this.updateRoomList();
+        },
+        onRemovedFromRoom: room => {
+          this.updateRoomList();
+        },
+        onRemovedFromRoom: room => {
+          this.updateRoomList();
+        },
+        onRoomDeleted: room => {
+          this.updateRoomList();
+        }
+      })
       .then(currentUser => {
         this.currentUser = currentUser;
         this.setState({ rooms: [...currentUser.rooms], hasRooms: true, currentUser: currentUser })
@@ -128,6 +141,24 @@ class Content extends Component {
           this.setState({
             Messages: [...this.state.Messages, message]
           })
+        },
+        onUserStartedTyping: user => {
+          console.log(`User ${user.name} started typing`)
+        },
+        onUserJoined: user => {
+          this.initialLoad()
+        },
+        onUserLeft: user => {
+          this.initialLoad()
+        },
+        onNewReadCursor: cursor => {
+          console.log(cursor)
+        },
+        onUserStoppedTyping: user => {
+          console.log(`User ${user.name} stopped typing`)
+        },
+        onPresenceChanged: (state, user) => {
+          console.log(state, user);
         }
       }
     })
@@ -136,7 +167,7 @@ class Content extends Component {
   render() {
     const { currentRoom, currentUser } = this.state;
     if (!this.state.hasRooms) {
-      var x = Math.floor((Math.random() * 11) + 1);
+      var x = Math.floor((Math.random() * 10) + 1);
       const placeHolder = this.state.placeHolder[x];
       return (
         <Loader placeHolder={placeHolder} />
