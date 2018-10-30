@@ -168,6 +168,7 @@ class Content extends Component {
                 team={currentRoom}
               />
               <Message
+                users={currentRoom.users}
                 message={this.state.Messages}
                 User={this.props.currentUser} />
               {

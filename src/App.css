@@ -589,3 +589,106 @@ thanks to loading.io
 }
 
 
+
+/*Temporary landing page styling 
+*/
+.landing-temp{
+  position: relative;
+  background-image: url('./img/showcase.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.landing-inner-temp{
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  padding-top: 50px;
+
+}
+
+.landing-temp h1{
+  font-size: 50px;
+  color: white;
+}
+
+.landing-temp p{
+  font-size: 20px;
+  color: white;
+}
+.countdown{
+  font-size: 50px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.countdown div:hover{
+  background: #636568;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+
+
+.countdown div{
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: 5px;
+  opacity: 0.7;
+  background: black;
+}
+
+.countdown p{
+    padding: 14px;
+    font-size: 25px;
+    display: block; 
+  }
+
+  @media(max-width:650px){
+    .landing-temp img{
+      width: 55%;
+    }
+
+    .landing-temp h1{
+font-size: 40px;
+    }
+
+    .countdown{
+      font-size: 30px;
+      flex-direction: column;
+    }
+
+    .countdown div{
+      display: none;
+    }
+    .countdown div:first-child{
+      display: block;
+      width:80%;
+      padding: 10px;
+    }
+  }
+
+  @media(max-height:600){
+    .landing-temp img{
+        height: 20%;
+    }
+    p{
+      display: none;
+    }
+  }
+
+  @media(max-height:400){
+    
+    h1{
+      display: none;
+    }
+  }

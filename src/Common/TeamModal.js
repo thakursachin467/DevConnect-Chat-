@@ -106,7 +106,7 @@ class ModalModalExample extends React.Component {
                     <Header icon style={{ backgroundColor: 'white' }}>
                       <Icon name='users' />
                       <p style={{ fontWeight: '200' }}>Enter an invite code and instantly join your friends team.</p>
-                      <Button positive size='large' onClick={this.joinTeam}> Join a Team</Button>
+                      <Button positive size='large' onClick={this.joinTeam}> Join a Team(under construction)</Button>
                     </Header>
 
                   </Grid.Column>

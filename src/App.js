@@ -5,6 +5,7 @@ import GitLogin from './Components/Auth/GitLogin';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import PrivateRoute from './Components/PrivateRoute';
+import HomeTemp from './Components/HomeTemp';
 import './App.css';
 
 
@@ -53,6 +54,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          <Route exact path='/' component={HomeTemp} />
           <Route exact path='/auth' component={Auth} />
           <Route exact path='/auth/github' component={GitLogin} />
 
