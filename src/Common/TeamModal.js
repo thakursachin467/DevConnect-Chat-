@@ -7,7 +7,8 @@ class ModalModalExample extends React.Component {
     this.state = {
       createTeam: false,
       joinTeam: false,
-      team: ''
+      team: '',
+      teamId: ''
     }
     this.joinTeam = this.joinTeam.bind(this);
     this.createTeam = this.createTeam.bind(this);
@@ -34,6 +35,15 @@ class ModalModalExample extends React.Component {
   createTeam() {
     this.setState({ createTeam: !this.state.createTeam })
   }
+
+  onTeamJoinSubmit(e) {
+    e.preventDefault();
+    this.props.joinTeam(this.state.teamId);
+    this.setState({ teamId: '' });
+    this.props.close();
+
+  }
+
   render() {
     let content;
     const { createTeam, joinTeam } = this.state;
@@ -79,6 +89,44 @@ class ModalModalExample extends React.Component {
 
 
         )
+      }
+      if (joinTeam) {
+        content = <React.Fragment>
+          <Modal.Content style={{ height: '30%' }}>
+            <Form
+              onSubmit={this.onSubmit}
+              style={{ width: '100%', marginLeft: 'auto', marginRight: 'auto' }}
+              size='large'
+            >
+              <Form.Field
+                width={16}
+                required>
+                <label>Team Id</label>
+                <Input
+                  name='teamId'
+                  value={this.state.teamId}
+                  onChange={this.onChange}
+                  placeholder='Team Id' />
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              icon='cancel'
+              labelPosition='right'
+              content='Go back'
+              color='black'
+              onClick={this.joinTeam.bind(this)} />
+
+            <Button
+              positive
+              icon='checkmark'
+              labelPosition='right'
+              content="Create"
+              onClick={this.onTeamJoinSubmit.bind(this)}
+            />
+          </Modal.Actions>
+        </React.Fragment>
       }
     } else {
       /* content = (

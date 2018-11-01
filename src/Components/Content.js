@@ -29,9 +29,22 @@ class Content extends Component {
     this.modalOpenSetting = this.modalOpenSetting.bind(this);
     this.openAddTeamModal = this.openAddTeamModal.bind(this);
     this.createTeam = this.createTeam.bind(this);
+    this.joinTeam = this.joinTeam.bind(this);
   }
   updateRoomList() {
     this.setState({ rooms: [...this.state.currentUser.rooms] });
+  }
+
+  joinTeam(teamId) {
+
+    this.state.currentUser.joinRoom({ roomId: Number(teamId) })
+      .then(room => {
+        this.updateRoomList();
+        console.log(`Joined room with ID: ${room.id}`)
+      })
+      .catch(err => {
+        console.log(`Error joining room ${teamId}: ${err}`)
+      })
   }
 
   initialLoad() {
@@ -182,6 +195,7 @@ class Content extends Component {
           createTeam={this.createTeam}
           open={this.state.openAddTeamModal}
           close={this.openAddTeamModal}
+          joinTeam={this.joinTeam}
         />
         <SettingModal
           open={this.state.openSettingModal}
