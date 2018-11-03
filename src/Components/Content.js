@@ -99,7 +99,7 @@ class Content extends Component {
         onRemovedFromRoom: room => {
           this.updateRoomList();
         },
-        onRemovedFromRoom: room => {
+        onRoomUpdated: room => {
           this.updateRoomList();
         },
         onRoomDeleted: room => {
