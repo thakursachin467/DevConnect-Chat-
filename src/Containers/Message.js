@@ -35,7 +35,7 @@ class Message extends Component {
     const calendarStrings = {
       lastDay: '[Yesterday at] LT',
       sameDay: '[Today at] LT',
-      lastWeek: '[last] dddd [at] LT',
+      lastWeek: '[Last] dddd [at] LT',
       sameElse: 'L'
     };
     return (

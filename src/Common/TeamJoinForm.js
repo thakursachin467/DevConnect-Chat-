@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, Button, Form, Input } from 'semantic-ui-react'
-
-export class CreateTeam extends React.Component {
+export class TeamJoinForm extends React.Component {
   render() {
 
     return <React.Fragment>
@@ -14,15 +13,15 @@ export class CreateTeam extends React.Component {
           marginRight: 'auto'
         }} size='large'>
           <Form.Field width={16} required>
-            <label>Team Name</label>
-            <Input name='team' value={this.props.team} onChange={this.props.onChange} placeholder='Team Name' />
+            <label>Team Id</label>
+            <Input name='teamId' value={this.props.teamId} onChange={this.props.onChange} placeholder='Team Id' />
           </Form.Field>
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button icon='cancel' labelPosition='right' content='Go back' color='black' onClick={this.props.createTeam} />
+        <Button icon='cancel' labelPosition='right' content='Go back' color='black' onClick={this.props.joinTeam.bind(this)} />
 
-        <Button positive icon='checkmark' labelPosition='right' content="Create" onClick={this.props.onSubmit} />
+        <Button positive icon='checkmark' labelPosition='right' content="Create" onClick={this.props.onTeamJoinSubmit.bind(this)} />
       </Modal.Actions>
     </React.Fragment>;
   }

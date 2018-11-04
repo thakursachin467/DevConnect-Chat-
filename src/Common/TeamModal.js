@@ -1,7 +1,8 @@
+import { TeamJoinForm } from './TeamJoinForm';
 import { CreateTeam } from './createTeam';
-import { JoinTeam } from './joinTeam';
+import { SelectOption } from './SelectOption';
 import React from 'react'
-import { Modal, Button, Divider, Grid, Header, Icon, Segment, Form, Input } from 'semantic-ui-react'
+import { Modal, Header } from 'semantic-ui-react'
 
 class ModalModalExample extends React.Component {
   constructor() {
@@ -52,48 +53,13 @@ class ModalModalExample extends React.Component {
     if (createTeam | joinTeam) {
       if (createTeam) {
         content = (
-          <CreateTeam team={this.state.team} height={height} width={width} marginLeft={marginLeft} marginRight={marginRight} onSubmit={this.onSubmit} onChange={this.onChange} createTeam={this.createTeam} />
+          <CreateTeam team={this.state.team} onSubmit={this.onSubmit} onChange={this.onChange} createTeam={this.createTeam} />
 
 
         )
       }
       if (joinTeam) {
-        content = <React.Fragment>
-          <Modal.Content style={{ height: '30%' }}>
-            <Form
-              onSubmit={this.onSubmit}
-              style={{ width: '100%', marginLeft: 'auto', marginRight: 'auto' }}
-              size='large'
-            >
-              <Form.Field
-                width={16}
-                required>
-                <label>Team Id</label>
-                <Input
-                  name='teamId'
-                  value={this.state.teamId}
-                  onChange={this.onChange}
-                  placeholder='Team Id' />
-              </Form.Field>
-            </Form>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button
-              icon='cancel'
-              labelPosition='right'
-              content='Go back'
-              color='black'
-              onClick={this.joinTeam.bind(this)} />
-
-            <Button
-              positive
-              icon='checkmark'
-              labelPosition='right'
-              content="Create"
-              onClick={this.onTeamJoinSubmit.bind(this)}
-            />
-          </Modal.Actions>
-        </React.Fragment>
+        content = <TeamJoinForm teamId={this.state.teamId} onSubmit={this.onSubmit} onChange={this.onChange} joinTeam={this.joinTeam} onTeamJoinSubmit={this.onTeamJoinSubmit} />
       }
     } else {
       /* content = (
@@ -104,7 +70,7 @@ class ModalModalExample extends React.Component {
          </Button.Group>
        ) */
       content = (
-        <JoinTeam height={height} cursor={cursor} backgroundColor={backgroundColor} fontWeight={fontWeight} fontSize={fontSize} createTeam={this.createTeam} joinTeam={this.joinTeam} />
+        <SelectOption createTeam={this.createTeam} joinTeam={this.joinTeam} />
 
       )
     }

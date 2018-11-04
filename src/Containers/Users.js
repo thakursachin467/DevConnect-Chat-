@@ -3,7 +3,7 @@ import React from 'react'
 const Users = (props) => {
   const { users, currentUser } = props;
   let content;
-  if (users == undefined) {
+  if (users === undefined) {
     content = (
       <h4 style={{ marginTop: '50%' }}> Please Select a team or join one</h4>
     )

@@ -1,14 +1,8 @@
 import React from 'react';
-import { Modal, Button, Divider, Grid, Header, Icon, Segment, Form, Input } from 'semantic-ui-react'
+import { Modal, Button, Divider, Grid, Header, Icon, Segment } from 'semantic-ui-react'
 
 
-export function JoinTeam({
-  height,
-  cursor,
-  backgroundColor,
-  fontWeight,
-  fontSize
-}) {
+export function SelectOption() {
   return <React.Fragment>
     <Modal.Content style={{
       height: '70%'
