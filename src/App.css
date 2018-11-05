@@ -132,6 +132,25 @@ body {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  border-color: #33f454;
+  border-style: solid;
+  border-width: .04cm;
+}
+.avatar-offline{
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-color: #267aef;
+  border-style: solid;
+  border-width: .04cm;
+}
+
+.avatar-message{
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   border-color: #267aef;
   border-style: solid;
   border-width: .04cm;

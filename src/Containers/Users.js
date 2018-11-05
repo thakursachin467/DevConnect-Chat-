@@ -12,11 +12,14 @@ const Users = (props) => {
 
       users.map(user => {
         return (<li className="online-user-list" key={user.id}>
-          <img className="avatar-online" alt="Avatar" src={user.avatarURL ? user.avatarURL : 'https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6'} />
+          <img className={user.presence.state === 'online' ? 'avatar-online' : "avatar-offline"} alt="Avatar" src={user.avatarURL ? user.avatarURL : 'https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6'} />
           <div className="about">
             <div className="name">{user.name}</div>
             <div className="status">
-              <span className='dot online'></span> <span className='text-muted'> online</span>
+              <span className={'dot' + ' ' + (user.presence.state === 'online' ? 'online' : 'offline')}></span>
+              <span className='text-muted'>
+                {user.presence.state === 'online' ? ' online' : 'offline'}
+              </span>
             </div>
           </div>
         </li>)
@@ -51,7 +54,7 @@ const Users = (props) => {
               <div className="name">{currentUser.name}</div>
               <div className="status">
                 <span className='dot online'></span> online
-            </div>
+              </div>
             </div>
           </div>
         </div>

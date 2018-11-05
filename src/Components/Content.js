@@ -30,9 +30,25 @@ class Content extends Component {
     this.openAddTeamModal = this.openAddTeamModal.bind(this);
     this.createTeam = this.createTeam.bind(this);
     this.joinTeam = this.joinTeam.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
   updateRoomList() {
     this.setState({ rooms: [...this.state.currentUser.rooms] });
+  }
+
+  sendMessage(message) {
+    const { currentUser, currentRoom } = this.state;
+    currentUser.sendMessage({
+      text: message,
+      roomId: currentRoom.id
+    })
+      .then(messageId => {
+        this.setState({ message: '' })
+        console.log(`Added message to ${currentRoom.name}`)
+      })
+      .catch(err => {
+        console.log(`Error adding message to ${currentRoom.name}: ${err}`)
+      })
   }
 
   joinTeam(teamId) {
@@ -56,7 +72,7 @@ class Content extends Component {
       if (hasRooms) {
         const index = _.findIndex(rooms, room => room.id == this.props.match.params.id);
         if (index == -1) {
-          return window.location.href('/team');
+          return window.location.href = '/team';
         }
         currenTeam = rooms[index];
         this.setState({ currentRoom: currenTeam });
@@ -170,8 +186,11 @@ class Content extends Component {
         onUserStoppedTyping: user => {
           console.log(`User ${user.name} stopped typing`)
         },
-        onPresenceChanged: (state, user) => {
-          console.log(state, user);
+        onPresenceChanged: ({ current, previous }, user) => {
+          console.log(current, previous);
+        },
+        onNewReadCursor: cursor => {
+          console.log(cursor);
         }
       }
     })
@@ -214,13 +233,15 @@ class Content extends Component {
               />
               <Message
                 users={currentRoom.users}
+                roomId={currentRoom.id}
                 message={this.state.Messages}
+                currentUser={this.state.currentUser}
                 User={this.props.currentUser} />
               {
                 currentRoom ? <Input
-                  user={this.props.currentUser}
-                  currentUser={this.state.currentUser}
-                  roomId={currentRoom.id}
+
+                  sendMessage={this.sendMessage}
+
                 /> : null
               }
             </React.Fragment>

@@ -27,7 +27,7 @@ class Login extends Component {
        */
       const currentTime = Date.now();
       if (userData.exp < currentTime) {
-        this.props.history.push('/team');
+        window.location.href = '/team';
       }
     }
   }

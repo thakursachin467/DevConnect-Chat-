@@ -4,29 +4,16 @@ class InputBox extends React.Component {
     super(props);
     this.state = {
       message: '',
-      user: '',
+
     }
   }
 
-  componentDidMount() {
-    this.setState({ currentUser: this.props.currentUser, user: this.props.user });
-
-  }
   onSubmit(e) {
     e.preventDefault()
     const { message } = this.state;
-    const { roomId, currentUser } = this.props;
-    currentUser.sendMessage({
-      text: message,
-      roomId: roomId
-    })
-      .then(messageId => {
-        this.setState({ message: '' })
-        console.log(`Added message to ${roomId.name}`)
-      })
-      .catch(err => {
-        console.log(`Error adding message to ${roomId.name}: ${err}`)
-      })
+    this.setState({ message: '' })
+    this.props.sendMessage(message);
+
 
   }
   onChange(e) {

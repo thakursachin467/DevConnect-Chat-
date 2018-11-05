@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
+import Loading from '../../Common/Loading';
 class GitLogin extends Component {
   state = {
     loading: true
@@ -22,7 +23,7 @@ class GitLogin extends Component {
   render() {
     let content;
     if (this.state.loading) {
-      content = <div>Loading</div>;
+      content = <Loading />;
 
     } else {
       content = <Redirect to='/auth' />
