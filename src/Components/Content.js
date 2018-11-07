@@ -52,7 +52,6 @@ class Content extends Component {
   }
 
   joinTeam(teamId) {
-
     this.state.currentUser.joinRoom({ roomId: Number(teamId) })
       .then(room => {
         this.updateRoomList();
@@ -101,6 +100,7 @@ class Content extends Component {
   }
 
   componentDidMount() {
+
     const chatManager = new ChatManager({
       instanceLocator: 'v1:us1:3dd62a71-d604-4985-bbb9-5965ea8bb128',
       userId: this.props.currentUser,

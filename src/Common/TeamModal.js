@@ -59,7 +59,7 @@ class ModalModalExample extends React.Component {
         )
       }
       if (joinTeam) {
-        content = <TeamJoinForm teamId={this.state.teamId} onSubmit={this.onSubmit} onChange={this.onChange} joinTeam={this.joinTeam} onTeamJoinSubmit={this.onTeamJoinSubmit} />
+        content = <TeamJoinForm teamId={this.state.teamId} onSubmit={this.onSubmit} onChange={this.onChange} joinTeam={this.joinTeam} onTeamJoinSubmit={this.onTeamJoinSubmit.bind(this)} />
       }
     } else {
       /* content = (

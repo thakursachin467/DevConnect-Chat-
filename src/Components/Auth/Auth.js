@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Logo from '../../img/logo2.png';
 import jwt_decode from "jwt-decode";
-import { Button, Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import axios from 'axios';
 class Login extends Component {
   state = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button, Divider, Grid, Header, Icon, Segment } from 'semantic-ui-react'
 
 
-export function SelectOption() {
+export function SelectOption(props) {
   return <React.Fragment>
     <Modal.Content style={{
       height: '70%'
@@ -13,7 +13,7 @@ export function SelectOption() {
         <Grid columns={2} textAlign='center'>
           <Divider vertical>Or</Divider>
           <Grid.Row verticalAlign='middle'>
-            <Grid.Column onClick={this.props.createTeam} style={{
+            <Grid.Column onClick={props.createTeam} style={{
               cursor: 'pointer'
             }}>
               <Header icon style={{
@@ -24,10 +24,10 @@ export function SelectOption() {
                   fontWeight: '200',
                   fontSize: '12'
                 }}>Create a team and invite your friends. it's free </p>
-                <Button size='large' onClick={this.props.createTeam}>Create a Team</Button>
+                <Button size='large' onClick={props.createTeam}>Create a Team</Button>
               </Header>
             </Grid.Column>
-            <Grid.Column onClick={this.props.joinTeam} style={{
+            <Grid.Column onClick={props.joinTeam} style={{
               cursor: 'pointer'
             }}>
               <Header icon style={{
@@ -37,7 +37,7 @@ export function SelectOption() {
                 <p style={{
                   fontWeight: '200'
                 }}>Enter an invite code and instantly join your friends team.</p>
-                <Button positive size='large' onClick={this.props.joinTeam}> Join a Team(under construction)</Button>
+                <Button positive size='large' onClick={props.joinTeam}> Join a Team(under construction)</Button>
               </Header>
 
             </Grid.Column>
