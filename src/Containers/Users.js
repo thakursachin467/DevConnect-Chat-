@@ -2,15 +2,16 @@ import React from 'react';
 import DropDown from '../Common/DropDown';
 
 const Users = (props) => {
-  const { users, currentUser } = props;
+  const { users, currentUser, github } = props;
   let content;
-  if (users === undefined) {
+  if (github) {
     content = (
-      <h4 style={{ marginTop: '50%' }}> Please Select a team or join one</h4>
+      <span >
+        <li>github data will be shown here</li>
+      </span>
     )
   } else {
     content = (
-
       users.map(user => {
         return (<li className="online-user-list" key={user.id}>
           <img className={user.presence.state === 'online' ? 'avatar-online' : "avatar-offline"} alt="Avatar" src={user.avatarURL ? user.avatarURL : 'https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6'} />
@@ -28,6 +29,8 @@ const Users = (props) => {
 
     )
   }
+
+
   return (
     <div className='teams '>
       <div className='online-user-box '>

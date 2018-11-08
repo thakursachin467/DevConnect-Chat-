@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
-import Loading from '../../Common/Loading';
+import Loading from '../../Common/Loader';
 class GitLogin extends Component {
   state = {
     loading: true

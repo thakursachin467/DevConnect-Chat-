@@ -17,6 +17,7 @@ class Content extends Component {
       currentUser: {},
       Messages: [],
       rooms: [],
+      showGithubData: false,
       hasRooms: false,
       placeHolder: ['Grab Your Coffee', 'Compiling your code', 'Fixing errors', 'Loading your content', 'Debugging your code', 'Logging the console', 'Configuration files', 'Committing your changes', 'Connecting to the community', 'Brewing some coffee', 'Installing caffeine'],
       currentRoom: {},
@@ -31,9 +32,31 @@ class Content extends Component {
     this.createTeam = this.createTeam.bind(this);
     this.joinTeam = this.joinTeam.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.toggleGithubData = this.toggleGithubData.bind(this);
+    this.UserLeaveTeam = this.UserLeaveTeam.bind(this);
   }
+
+  toggleGithubData() {
+    this.setState({ showGithubData: !this.state.showGithubData });
+    console.log(this.state.showGithubData);
+  }
+
   updateRoomList() {
     this.setState({ rooms: [...this.state.currentUser.rooms] });
+  }
+
+  UserLeaveTeam(teamId) {
+    const { currentUser } = this.state;
+    currentUser.leaveRoom({ roomId: Number(teamId) })
+      .then(room => {
+        this.updateRoomList();
+        this.setState({ currentRoom: {} });
+
+
+      })
+      .catch(err => {
+        console.log(`Error leaving room ${teamId}: ${err}`)
+      })
   }
 
   sendMessage(message) {
@@ -224,12 +247,16 @@ class Content extends Component {
           currentRoom.name ?
             <React.Fragment>
               <User
+                github={this.state.showGithubData}
                 users={currentRoom.users}
                 currentUser={currentUser}
 
               />
               <Header
                 team={currentRoom}
+                github={this.state.showGithubData}
+                githubData={this.toggleGithubData}
+                leaveRoom={this.UserLeaveTeam}
               />
               <Message
                 users={currentRoom.users}
