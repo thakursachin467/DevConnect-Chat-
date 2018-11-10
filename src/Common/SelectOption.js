@@ -4,6 +4,7 @@ import { Modal, Button, Divider, Grid, Header, Icon, Segment } from 'semantic-ui
 
 export function SelectOption(props) {
   return <React.Fragment>
+    <Header style={{ textAlign: 'center', borderBottom: '0px solid white' }}>Another Team huh? Looks like you're working overtime.</Header>
     <Modal.Content style={{
       height: '70%'
     }}>
@@ -37,7 +38,7 @@ export function SelectOption(props) {
                 <p style={{
                   fontWeight: '200'
                 }}>Enter an invite code and instantly join your friends team.</p>
-                <Button positive size='large' onClick={props.joinTeam}> Join a Team(under construction)</Button>
+                <Button positive size='large' onClick={props.joinTeam}> Join a Team</Button>
               </Header>
 
             </Grid.Column>

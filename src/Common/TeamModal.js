@@ -2,7 +2,7 @@ import { TeamJoinForm } from './TeamJoinForm';
 import { CreateTeam } from './createTeam';
 import { SelectOption } from './SelectOption';
 import React from 'react'
-import { Modal, Header } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 
 class ModalModalExample extends React.Component {
   constructor() {
@@ -77,13 +77,8 @@ class ModalModalExample extends React.Component {
 
 
     return (
-      <Modal open={this.props.open} onClose={this.props.close} size='small' style={{ height: '65%' }}>
-        <Header style={{ textAlign: 'center', borderBottom: '0px solid white' }}>Please choose an option</Header>
-
+      <Modal open={this.props.open} onClose={this.props.close} size='small' className={'' + (createTeam ? 'modalSecondary' : 'modalPrimary')} >
         {content}
-
-
-
       </Modal>
     )
   }

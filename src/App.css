@@ -784,3 +784,11 @@ font-size: 40px;
     }
   }
   
+
+  .modalPrimary{
+    height: 48%;
+  }
+
+  .modalSecondary{
+    height: 40%;
+  }

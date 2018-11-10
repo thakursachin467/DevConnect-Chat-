@@ -1,10 +1,12 @@
 import React from 'react';
-import { Modal, Button, Form, Input } from 'semantic-ui-react'
+import { Modal, Button, Form, Input, Header } from 'semantic-ui-react'
 
 export class CreateTeam extends React.Component {
   render() {
 
     return <React.Fragment>
+      <Header style={{ textAlign: 'center', borderBottom: '0px solid white' }}>Create a Team.</Header>
+      <p style={{ marginLeft: '10px', color: 'black', fontSize: '1.2rem' }}>By creating a team you will have access to free text messages amongst your team and friends.</p>
       <Modal.Content style={{
         height: '30%'
       }}>

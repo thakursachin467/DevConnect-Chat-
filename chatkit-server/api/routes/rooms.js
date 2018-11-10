@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../models/User');
+const jwt = require('jsonwebtoken');
+const secret = require('../../Config/keys');
 const chatkit = require('../../Config/chatkit');
 
 
@@ -9,7 +10,17 @@ const chatkit = require('../../Config/chatkit');
 //@access private route
 
 router.get('/invite/:teamId', (req, res) => {
-
+  const { teamId } = req.params.teamId;
+  const payload = {
+    teamId: teamId
+  } //created jwt payload
+  //sign token
+  jwt.sign(payload, secret.secretOrKey, { expiresIn: 86400000 }, (err, token) => {
+    res.json({
+      success: true,
+      token: 'https://admiring-snyder-dead31.netlify.com/invite/' + token
+    });
+  });
 
 });
 
