@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import PrivateRoute from './Components/PrivateRoute';
 import HomeTemp from './Components/HomeTemp';
 import Logout from './Components/Logout';
+import InviteHandler from './Containers/InviteLink';
 import './App.css';
 
 
@@ -60,6 +61,7 @@ class App extends Component {
           <Route exact path='/auth/github' component={GitLogin} />
           <PrivateRoute exact path='/team' isAuthanticated={this.state.authorize} currentUser={this.state.currentUser} component={Content} />
           <PrivateRoute exact path='/team/:id' isAuthanticated={this.state.authorize} currentUser={this.state.currentUser} component={Content} />
+          <PrivateRoute exact path='/invite/:link' isAuthanticated={this.state.authorize} component={InviteHandler} />
           <PrivateRoute exact path='/logout' isAuthanticated={this.state.authorize} component={Logout} />
         </Switch>
 
