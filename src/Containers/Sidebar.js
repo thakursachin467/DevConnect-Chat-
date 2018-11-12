@@ -40,7 +40,6 @@ class Sidebar extends Component {
           <div >
             <li onClick={() => { this.props.subscribeToRoom(room.id, room) }}>
               {room.name}
-              <span onClick={() => this.props.modalOpenSetting()} className='setting'><Icon name='setting' className='settingIcon' /></span>
             </li>
 
           </div>

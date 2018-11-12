@@ -4,11 +4,12 @@ import Sidebar from '../Containers/Sidebar';
 import User from '../Containers/Users';
 import Header from '../Containers/Hearder';
 import Input from '../Containers/InputBox';
+import axios from 'axios';
 import { ChatManager, TokenProvider } from '@pusher/chatkit'
 import _ from 'lodash';
 import Loader from '../Common/Loading';
 import Placeholder from '../img/placeholder.png';
-import SettingModal from '../Common/SettingModal';
+import SettingModal from '../Common/InviteForm';
 import TeamModal from '../Common/TeamModal';
 class Content extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class Content extends Component {
       placeHolder: ['Grab Your Coffee', 'Compiling your code', 'Fixing errors', 'Loading your content', 'Debugging your code', 'Logging the console', 'Configuration files', 'Committing your changes', 'Connecting to the community', 'Brewing some coffee', 'Installing caffeine'],
       currentRoom: {},
       openSettingModal: false,
-      openAddTeamModal: false
+      openAddTeamModal: false,
+      inviteLink: ''
     }
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getPublicRooms.bind(this);
@@ -161,7 +163,16 @@ class Content extends Component {
 
 
   modalOpenSetting() {
+    const { currentRoom } = this.state;
     this.setState({ openSettingModal: !this.state.openSettingModal });
+    axios.post(`http://localhost:5000/api/room/invite/${currentRoom.id}`)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ inviteLink: res.data.token });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
   }
 
@@ -220,7 +231,7 @@ class Content extends Component {
   }
 
   render() {
-    const { currentRoom, currentUser } = this.state;
+    const { currentRoom, currentUser, inviteLink } = this.state;
     if (!this.state.hasRooms) {
       var x = Math.floor((Math.random() * 10) + 1);
       const placeHolder = this.state.placeHolder[x];
@@ -242,6 +253,8 @@ class Content extends Component {
         <SettingModal
           open={this.state.openSettingModal}
           close={this.modalOpenSetting}
+          name={currentRoom.name}
+          link={inviteLink}
         />
         {
           currentRoom.name ?
@@ -254,6 +267,7 @@ class Content extends Component {
               />
               <Header
                 team={currentRoom}
+                modalOpenSetting={this.modalOpenSetting}
                 github={this.state.showGithubData}
                 githubData={this.toggleGithubData}
                 leaveRoom={this.UserLeaveTeam}
@@ -294,7 +308,7 @@ class Content extends Component {
               currentUser={this.state.currentUser}
               rooms={this.state.rooms}
               updateRoomList={this.updateRoomList.bind(this)}
-              modalOpenSetting={this.modalOpenSetting}
+
               openAddTeamModal={this.openAddTeamModal}
             />
           ) : (

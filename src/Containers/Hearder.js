@@ -2,7 +2,7 @@ import { HeaderLinks } from './HeaderLinks';
 import React from 'react'
 
 const Header = (props) => {
-  const { team } = props;
+  const { team, modalOpenSetting } = props;
   return (
     <div className='header box'>{
       team.name ? team.name : 'Join a Team'
@@ -12,6 +12,7 @@ const Header = (props) => {
         githubData={props.githubData}
         github={props.github}
         teamId={team.id}
+        modalOpenSetting={modalOpenSetting}
         leaveRoom={props.leaveRoom}
       />
 

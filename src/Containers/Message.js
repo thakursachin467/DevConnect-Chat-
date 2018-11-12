@@ -45,7 +45,7 @@ class Message extends Component {
             this.props.message.map(message => {
               return (
                 <li className='Other-user' key={message.id}>
-                  <img className="avatar-message" alt="Avatar" src={usersObject[message.senderId] ? usersObject[message.senderId] : "https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6"} /> <span className='dot online'></span> <strong>{message.senderId === User ? ' You' : message.senderId}</strong> <span className="message-data-time">
+                  <img className="avatar-message" alt="Avatar" src={usersObject[message.senderId] ? usersObject[message.senderId] : "https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6"} /> <span className='dot online'></span> <strong>{message.senderId === User ? ' You' : usersObject[message.senderId] ? message.senderId : 'User Removed'}</strong> <span className="message-data-time">
                     <Moment calendar={calendarStrings}>
                       {
                         message.createdAt}

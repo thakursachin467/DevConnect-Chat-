@@ -9,7 +9,8 @@ const chatkit = require('../../Config/chatkit');
 //@description create a room
 //@access private route
 
-router.get('/invite/:teamId', (req, res) => {
+router.post('/invite/:teamId', (req, res) => {
+  console.log('object')
   const { teamId } = req.params.teamId;
   const payload = {
     teamId: teamId

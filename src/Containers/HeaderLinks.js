@@ -1,14 +1,14 @@
 import React from 'react'
 import { Icon, Dropdown } from 'semantic-ui-react'
 export function HeaderLinks(props) {
-  const { leaveRoom, teamId } = props;
+  const { leaveRoom, teamId, modalOpenSetting } = props;
   const trigger = (
     <span>
       <Icon name='angle down' size='large' />
     </span>
   )
   const options = [
-    { icon: 'add user', key: 'invite', text: 'Invite a friend' },
+    { icon: 'add user', key: 'invite', text: 'Invite a friend', onClick: () => modalOpenSetting() },
     { icon: 'git', key: 'repo', text: 'Link a repo' },
     { icon: 'sign-out', key: 'leave', text: 'leave team', onClick: () => leaveRoom(teamId) }
   ]
