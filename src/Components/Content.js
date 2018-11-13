@@ -197,13 +197,17 @@ class Content extends Component {
 
   subscribeToRoom(roomId, roomName) {
     this.setState({ Messages: [], currentRoom: roomName });
+    console.log(roomId);
     this.currentUser.subscribeToRoom({
       roomId: roomId,
       hooks: {
         onNewMessage: message => {
-          this.setState({
-            Messages: [...this.state.Messages, message]
-          })
+          if (message.roomId === this.state.currentRoom.id) {
+            this.setState({
+              Messages: [...this.state.Messages, message]
+            })
+          }
+
         },
         onUserStartedTyping: user => {
           console.log(`User ${user.name} started typing`)
