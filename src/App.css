@@ -85,7 +85,8 @@ body {
 }
 
 .inner-card{
-  width: 250px;
+  width: 225px;
+  margin:10px;
   display: flex;
   height: 4rem;
   margin-top: 6px;

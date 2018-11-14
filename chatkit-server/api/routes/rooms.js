@@ -1,27 +1,50 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const room = require('../../models/Rooms');
 const secret = require('../../Config/keys');
 const chatkit = require('../../Config/chatkit');
+const shortid = require('shortid');
 
 
 //@route POST /api/room/invite/:name
 //@description create a room
 //@access private route
 
+
 router.post('/invite/:teamId', (req, res) => {
   console.log('object')
   const { teamId } = req.params.teamId;
-  const payload = {
-    teamId: teamId
-  } //created jwt payload
-  //sign token
-  jwt.sign(payload, secret.secretOrKey, { expiresIn: 86400000 }, (err, token) => {
-    res.json({
-      success: true,
-      token: 'https://admiring-snyder-dead31.netlify.com/invite/' + token
-    });
-  });
+  room.findOne({ roomId: teamId })
+    .then((room) => {
+      if (!room) {
+        const id = shortid.generate();
+        data = new room({
+          roomId: teamId,
+          token: id
+        })
+        data.save()
+          .then((res) => {
+            const link = 'https://admiring-snyder-dead31.netlify.com/invite/' + id;
+            res.json({
+              success: true,
+              token: link
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      } else {
+        res.json({
+          success: true,
+          token: room.token
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
 
 });
 
@@ -31,24 +54,39 @@ router.post('/invite/:teamId', (req, res) => {
 //@access private route
 
 router.get('/add/:id', (req, res) => {
-  const userIds = req.body.user;
-  chatkit.addUsersToRoom({
-    roomId: room.id,
-    userIds: userIds
-  })
-    .then(() => {
-      console.log('added');
-      res.status(200).json({
-        sucess: true
-      })
+  const userId = req.body.user;
+  const id = req.params.id;
+  user.findOne({ token: id })
+    .then((room) => {
+      if (!room) {
+        res.json({
+          success: false
+        });
+      } else {
+        chatkit.addUsersToRoom({
+          roomId: room.roomId,
+          userIds: userId
+        })
+          .then(() => {
+            console.log('added');
+            res.status(200).json({
+              sucess: true
+            })
+          })
+          .catch(err => {
+            console.error(err)
+            res.status(400).json({
+              sucess: false,
+              error: err
+            })
+          })
+
+      }
     })
-    .catch(err => {
-      console.error(err)
-      res.status(400).json({
-        sucess: false,
-        error: err
-      })
+    .catch((err) => {
+      console.log(err);
     })
+
 });
 
 

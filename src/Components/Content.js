@@ -145,6 +145,9 @@ class Content extends Component {
         },
         onRoomDeleted: room => {
           this.updateRoomList();
+        },
+        onPresenceChanged: (state, user) => {
+          console.log(`User ${user.name} is ${state.current}`)
         }
       })
       .then(currentUser => {
@@ -213,10 +216,10 @@ class Content extends Component {
           console.log(`User ${user.name} started typing`)
         },
         onUserJoined: user => {
-          this.initialLoad()
+          this.initialLoad();
         },
         onUserLeft: user => {
-          this.initialLoad()
+          this.initialLoad();
         },
         onNewReadCursor: cursor => {
           console.log(cursor)
@@ -224,13 +227,14 @@ class Content extends Component {
         onUserStoppedTyping: user => {
           console.log(`User ${user.name} stopped typing`)
         },
-        onPresenceChanged: ({ current, previous }, user) => {
-          console.log(current, previous);
+        onPresenceChanged: (state, user) => {
+          console.log(`User ${user.name} is ${state.current}`)
         },
         onNewReadCursor: cursor => {
           console.log(cursor);
         }
-      }
+      },
+      messageLimit: 100
     })
   }
 
