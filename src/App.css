@@ -368,7 +368,8 @@ input {
 
 .online{
   background-color: #33f454;
-  margin-left: 3px;
+  margin-left: 4px;
+  margin-right: 3px;
   font-size: 10px;
 }
 
@@ -415,7 +416,10 @@ input {
 }
 
 .text-muted{
-  color:#777
+  color:#777;
+  margin-top: 1px;
+  
+
 }
 
 .auth{

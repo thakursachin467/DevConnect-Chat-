@@ -36,11 +36,11 @@ class Content extends Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.toggleGithubData = this.toggleGithubData.bind(this);
     this.UserLeaveTeam = this.UserLeaveTeam.bind(this);
+    this.fetchMessage = this.fetchMessage.bind(this);
   }
 
   toggleGithubData() {
     this.setState({ showGithubData: !this.state.showGithubData });
-    console.log(this.state.showGithubData);
   }
 
   updateRoomList() {
@@ -164,12 +164,27 @@ class Content extends Component {
       })
   }
 
+  fetchMessage(messageId) {
+    const { currentUser, currentRoom } = this.state;
+    currentUser.fetchMessages({
+      roomId: currentRoom.id,
+      initialId: Number(messageId),
+      direction: 'older',
+      limit: 10,
+    })
+      .then(messages => {
+        this.setState({ Messages: [...messages, ...this.state.Messages] })
+      })
+      .catch(err => {
+        console.log(`Error fetching messages: ${err}`)
+      })
+  }
 
   modalOpenSetting() {
     const { currentRoom } = this.state;
     this.setState({ inviteLink: '' });
     this.setState({ openSettingModal: !this.state.openSettingModal });
-    axios.post(`http://localhost:5000/api/room/invite/${currentRoom.id}`)
+    axios.post(`https://ancient-temple-53657.herokuapp.com/api/room/invite/${currentRoom.id}`)
       .then((res) => {
         console.log(res.data);
         this.setState({ inviteLink: res.data.token });
@@ -235,7 +250,7 @@ class Content extends Component {
           console.log(cursor);
         }
       },
-      messageLimit: 100
+      messageLimit: 15
     })
   }
 
@@ -283,10 +298,10 @@ class Content extends Component {
               />
               <Message
                 users={currentRoom.users}
-                roomId={currentRoom.id}
                 message={this.state.Messages}
-                currentUser={this.state.currentUser}
-                User={this.props.currentUser} />
+                User={this.props.currentUser}
+                fetchMessage={this.fetchMessage}
+              />
               {
                 currentRoom ? <Input
 

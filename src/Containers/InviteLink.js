@@ -14,7 +14,7 @@ class InviteHandler extends Component {
     const teamId = this.props.match.params.link;
     const { currentUser } = this.props;
     console.log(this.props);
-    axios.post(`http://localhost:5000/api/room/add/${teamId}`, {
+    axios.post(`https://ancient-temple-53657.herokuapp.com/api/room/add/${teamId}`, {
 
       user: currentUser
 

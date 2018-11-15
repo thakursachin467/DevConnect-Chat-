@@ -1,10 +1,12 @@
+import { MessageList } from './MessageList';
 import React, { Component } from 'react'
-import Moment from 'react-moment';
+
 
 class Message extends Component {
   constructor(props) {
     super(props)
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
 
@@ -18,13 +20,20 @@ class Message extends Component {
 
   }
 
+  handleScroll() {
+    const { fetchMessage, message } = this.props;
+    if (this.scroller && this.scroller.scrollTop <= 0) {
+      fetchMessage(message[0].id)
+    }
+  }
+
   render() {
-
-
     let loading = true;
-    let usersObject = {}
-    const { users, User, roomId, currentUser } = this.props;
-    usersObject = users.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.avatarURL }), {})
+    let usersObject = {};
+    const { users, User } = this.props;
+    usersObject = users.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.avatarURL }), {});
+    const presenceStore = users[0].presenceStore.store;
+
     if (this.props.message.length > 0) {
       loading = false;
 
@@ -39,23 +48,25 @@ class Message extends Component {
       sameElse: 'L'
     };
     return (
-      <div className='messages box-message'>
-        <ul className='message-list'>
+      <div
+        className='messages box-message'
+        onScroll={this.handleScroll}
+        ref={(scroller) => {
+          this.scroller = scroller;
+        }}
+      >
+
+        <ul className='message-list' >
           {
             this.props.message.map(message => {
               return (
-                <li className='Other-user' key={message.id}>
-                  <img className="avatar-message" alt="Avatar" src={usersObject[message.senderId] ? usersObject[message.senderId] : "https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-stock-vector-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg?ver=6"} /> <span className='dot online'></span> <strong>{message.senderId === User ? ' You' : usersObject[message.senderId] ? message.senderId : 'User Removed'}</strong> <span className="message-data-time">
-                    <Moment calendar={calendarStrings}>
-                      {
-                        message.createdAt}
-                    </Moment>
-                  </span>
-                  <div className='message-body'>
-                    <span className='message-text'>{message.text}</span>
-                  </div>
-
-                </li>
+                <MessageList
+                  key={message.id}
+                  message={message}
+                  presenceStore={presenceStore}
+                  User={User}
+                  usersObject={usersObject}
+                  calendarStrings={calendarStrings} />
               )
             })
           }
