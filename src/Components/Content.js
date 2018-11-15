@@ -167,6 +167,7 @@ class Content extends Component {
 
   modalOpenSetting() {
     const { currentRoom } = this.state;
+    this.setState({ inviteLink: '' });
     this.setState({ openSettingModal: !this.state.openSettingModal });
     axios.post(`http://localhost:5000/api/room/invite/${currentRoom.id}`)
       .then((res) => {

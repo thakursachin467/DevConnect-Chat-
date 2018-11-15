@@ -12,10 +12,20 @@ class InviteHandler extends Component {
   }
   componentDidMount() {
     const teamId = this.props.match.params.link;
-    console.log(this.props.match.params.link);
-    setTimeout(() => {
-      this.setState({ loading: false, teamId: teamId })
-    }, 5000)
+    const { currentUser } = this.props;
+    console.log(this.props);
+    axios.post(`http://localhost:5000/api/room/add/${teamId}`, {
+
+      user: currentUser
+
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
   }
   render() {
     const { loading } = this.state;

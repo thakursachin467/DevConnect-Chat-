@@ -11,7 +11,7 @@
   "author": "Sachin Thakur",
   "license": "MIT",
   "dependencies": {
-    "@pusher/chatkit-server": "^0.12.2",
+    "@pusher/chatkit-server": "^1.0.4",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",

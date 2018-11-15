@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const room = require('../../models/Rooms');
-const secret = require('../../Config/keys');
+
+const Room = require('../../models/Rooms');
+
 const chatkit = require('../../Config/chatkit');
 const shortid = require('shortid');
 
@@ -13,22 +13,22 @@ const shortid = require('shortid');
 
 
 router.post('/invite/:teamId', (req, res) => {
-  console.log('object')
-  const { teamId } = req.params.teamId;
-  room.findOne({ roomId: teamId })
+  const { teamId } = req.params;
+  Room.findOne({ roomId: teamId })
     .then((room) => {
+      console.log(room);
       if (!room) {
         const id = shortid.generate();
-        data = new room({
+        const data = new Room({
           roomId: teamId,
           token: id
         })
         data.save()
-          .then((res) => {
-            const link = 'https://admiring-snyder-dead31.netlify.com/invite/' + id;
+          .then((resp) => {
+            const link = `https://admiring-snyder-dead31.netlify.com/invite/${id}`;
             res.json({
               success: true,
-              token: link
+              token: `https://admiring-snyder-dead31.netlify.com/invite/${resp.token}`
             });
           })
           .catch((err) => {
@@ -37,7 +37,7 @@ router.post('/invite/:teamId', (req, res) => {
       } else {
         res.json({
           success: true,
-          token: room.token
+          token: `https://admiring-snyder-dead31.netlify.com/invite/${room.token}`
         });
       }
     })
@@ -49,36 +49,38 @@ router.post('/invite/:teamId', (req, res) => {
 });
 
 
-//@route POST /api/room/deleteRoom/:name
+//@route POST /api/room/add/:name
 //@description delete a room
 //@access private route
 
-router.get('/add/:id', (req, res) => {
+router.post('/add/:id', (req, res) => {
   const userId = req.body.user;
   const id = req.params.id;
-  user.findOne({ token: id })
+  Room.findOne({ token: id })
     .then((room) => {
+      console.log(room);
       if (!room) {
-        res.json({
+        res.status(400).json({
           success: false
         });
       } else {
+
         chatkit.addUsersToRoom({
           roomId: room.roomId,
-          userIds: userId
+          userIds: [userId]
         })
           .then(() => {
-            console.log('added');
-            res.status(200).json({
-              sucess: true
-            })
-          })
+            res.json({
+              success: true,
+              team: room.roomId
+            });
+          }
+          )
           .catch(err => {
             console.error(err)
             res.status(400).json({
-              sucess: false,
-              error: err
-            })
+              success: false,
+            });
           })
 
       }

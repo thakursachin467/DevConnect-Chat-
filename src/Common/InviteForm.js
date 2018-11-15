@@ -25,6 +25,7 @@ class InviteForm extends React.Component {
         <Modal.Header>Invite Friends to {this.props.name}</Modal.Header>
         <Modal.Content >
           <Input
+            loading={this.props.link === '' ? true : false}
             ref={(input) => this.input = input}
             style={{ width: '80%' }}
             action={{ color: 'teal', labelPosition: 'right', icon: 'copy', content: this.state.text, onClick: () => this.copyText() }}
