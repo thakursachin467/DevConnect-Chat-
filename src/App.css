@@ -607,7 +607,7 @@ thanks to loading.io
 
 
 .joinTeamBtn{
-  margin-left: 50%;
+  margin-left: 45%;
   margin-right: auto;
   display: block;
   margin-top: 2%;
@@ -615,7 +615,6 @@ thanks to loading.io
   color: white;
   padding: 20px 80px;
   border-radius: 8px;
-  cursor: pointer;
   font-size: 15px;
 
 }

@@ -334,13 +334,14 @@ class Content extends Component {
 
             : (
               <div>
-                <img src={Placeholder} height='250px' width='250px' style={{ marginLeft: '50%', marginRight: 'auto', display: 'block', marginTop: '24%' }} />
+                <img src={Placeholder} height='250px' width='180px' style={{ marginLeft: '50%', marginRight: 'auto', display: 'block', marginTop: '24%', marginLeft: '54%' }} />
                 <h3 style={{ marginLeft: '60%', marginRight: 'auto', display: 'block', marginTop: '2%' }} >Or</h3>
                 <button
                   className='joinTeamBtn'
                   onClick={this.onJoinTeamClick.bind(this)}
+                  disabled
                 >
-                  Join a team
+                  Join a team from sidebar
                 </button>
               </div>
             )
