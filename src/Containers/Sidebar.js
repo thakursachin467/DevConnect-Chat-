@@ -28,7 +28,7 @@ class Sidebar extends Component {
 
   render() {
     const { rooms } = this.props;
-    let room = (<div>Loading rooms</div>);
+    let room = (<div style={{ marginLeft: '25%', marginTop: '50%' }}>No rooms Found</div>);
     if (rooms.length > 0) {
       room = rooms.map(room => {
         return <NavLink

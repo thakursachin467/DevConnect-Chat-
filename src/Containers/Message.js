@@ -7,16 +7,25 @@ class Message extends Component {
     super(props)
     this.scrollToBottom = this.scrollToBottom.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.myRef = React.createRef();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
 
-
-  scrollToBottom(el) {
-    if (el == null) {
+  scrollToBottom() {
+    const el = this.myRef;
+    console.log(el.current);
+    if (el.current === null) {
 
     } else {
-      el.scrollIntoView({ behavior: "smooth" });
+      el.current.scrollIntoView({ behavior: "instant", block: "nearest", inline: "nearest" });
     }
+
+
+
 
   }
 
@@ -25,9 +34,11 @@ class Message extends Component {
     if (this.scroller && this.scroller.scrollTop <= 0) {
       fetchMessage(message[0].id)
     }
+
   }
 
   render() {
+
     let loading = true;
     let usersObject = {};
     const { users, User } = this.props;
@@ -66,14 +77,14 @@ class Message extends Component {
                   presenceStore={presenceStore}
                   User={User}
                   usersObject={usersObject}
-                  calendarStrings={calendarStrings} />
+                  calendarStrings={calendarStrings}
+                  currentId={this.props.currentId}
+                  refProp={this.myRef}
+                />
               )
             })
           }
-          <div style={{ float: "left", clear: "both" }} ref={(el) => {
-            this.scrollToBottom(el)
-          }} >
-          </div>
+
         </ul>
 
 

@@ -24,7 +24,8 @@ class Content extends Component {
       currentRoom: {},
       openSettingModal: false,
       openAddTeamModal: false,
-      inviteLink: ''
+      inviteLink: '',
+      currentId: ''
     }
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getPublicRooms.bind(this);
@@ -37,6 +38,7 @@ class Content extends Component {
     this.toggleGithubData = this.toggleGithubData.bind(this);
     this.UserLeaveTeam = this.UserLeaveTeam.bind(this);
     this.fetchMessage = this.fetchMessage.bind(this);
+    this.joinRoomUsingLink = this.joinRoomUsingLink.bind(this);
   }
 
   toggleGithubData() {
@@ -75,16 +77,32 @@ class Content extends Component {
         console.log(`Error adding message to ${currentRoom.name}: ${err}`)
       })
   }
-
+  joinRoomUsingLink(teamId) {
+    let currenTeam;
+    const { rooms } = this.state;
+    const index = _.findIndex(rooms, room => room.id == teamId);
+    currenTeam = rooms[index];
+    this.setState({ currentRoom: currenTeam });
+  }
   joinTeam(teamId) {
-    this.state.currentUser.joinRoom({ roomId: Number(teamId) })
-      .then(room => {
+    const { currentUser } = this.state;
+    const link = teamId.replace('https://admiring-snyder-dead31.netlify.com/invite/', '');
+    axios.post(`https://ancient-temple-53657.herokuapp.com/api/room/add/${link}`, {
+
+      user: currentUser.id
+
+    })
+      .then((res) => {
+        console.log(res.data);
         this.updateRoomList();
-        console.log(`Joined room with ID: ${room.id}`)
+        this.joinRoomUsingLink(res.data.team);
+
       })
-      .catch(err => {
-        console.log(`Error joining room ${teamId}: ${err}`)
+      .catch((err) => {
+        console.log(err);
       })
+
+
   }
 
   initialLoad() {
@@ -173,7 +191,9 @@ class Content extends Component {
       limit: 10,
     })
       .then(messages => {
-        this.setState({ Messages: [...messages, ...this.state.Messages] })
+
+        this.setState({ Messages: [...messages, ...this.state.Messages], currentId: messages[9].id });
+
       })
       .catch(err => {
         console.log(`Error fetching messages: ${err}`)
@@ -216,7 +236,6 @@ class Content extends Component {
 
   subscribeToRoom(roomId, roomName) {
     this.setState({ Messages: [], currentRoom: roomName });
-    console.log(roomId);
     this.currentUser.subscribeToRoom({
       roomId: roomId,
       hooks: {
@@ -224,6 +243,7 @@ class Content extends Component {
           if (message.roomId === this.state.currentRoom.id) {
             this.setState({
               Messages: [...this.state.Messages, message]
+              , currentId: message.id
             })
           }
 
@@ -297,6 +317,7 @@ class Content extends Component {
                 leaveRoom={this.UserLeaveTeam}
               />
               <Message
+                currentId={this.state.currentId}
                 users={currentRoom.users}
                 message={this.state.Messages}
                 User={this.props.currentUser}
