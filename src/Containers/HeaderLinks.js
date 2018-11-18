@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon, Dropdown } from 'semantic-ui-react'
 export function HeaderLinks(props) {
-  const { leaveRoom, teamId, modalOpenSetting } = props;
+  const { leaveRoom, teamId, modalOpenSetting, currentUser, creator, deleteRoom } = props;
   const trigger = (
     <span>
       <Icon name='angle down' size='large' />
@@ -10,7 +10,8 @@ export function HeaderLinks(props) {
   const options = [
     { icon: 'add user', key: 'invite', text: 'Invite a friend', onClick: () => modalOpenSetting() },
     { icon: 'git', key: 'repo', text: 'Link a repo' },
-    { icon: 'sign-out', key: 'leave', text: 'leave team', onClick: () => leaveRoom(teamId) }
+    { icon: 'sign-out', key: 'leave', text: 'leave team', onClick: () => leaveRoom(teamId) },
+    (currentUser === creator ? { icon: 'delete', key: 'Delete', text: 'Delete team', onClick: () => deleteRoom() } : '')
   ]
   return (
     <React.Fragment>

@@ -39,10 +39,23 @@ class Content extends Component {
     this.UserLeaveTeam = this.UserLeaveTeam.bind(this);
     this.fetchMessage = this.fetchMessage.bind(this);
     this.joinRoomUsingLink = this.joinRoomUsingLink.bind(this);
+    this.deleteRoom = this.deleteRoom.bind(this);
   }
 
   toggleGithubData() {
     this.setState({ showGithubData: !this.state.showGithubData });
+  }
+
+  deleteRoom() {
+    const { currentRoom } = this.state;
+    console.log(currentRoom.id);
+    axios.post(`http://localhost:5000/api/room/delete/${currentRoom.id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   updateRoomList() {
@@ -310,6 +323,9 @@ class Content extends Component {
 
               />
               <Header
+                deleteRoom={this.deleteRoom}
+                creator={currentRoom.createdByUserId}
+                currentUser={currentUser.id}
                 team={currentRoom}
                 modalOpenSetting={this.modalOpenSetting}
                 github={this.state.showGithubData}

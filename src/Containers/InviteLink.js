@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import Loader from '../Common/Loader';
 
 class InviteHandler extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class InviteHandler extends Component {
     })
       .then((res) => {
         console.log(res);
+        this.setState({ loading: false });
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +33,7 @@ class InviteHandler extends Component {
     const { loading } = this.state;
     let content;
     if (loading) {
-      content = (<div>Loading...............</div>)
+      content = (<Loader />)
     } else {
       content = (<Redirect to={`/team/${this.state.teamId}`} />)
     }

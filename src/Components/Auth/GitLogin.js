@@ -26,7 +26,7 @@ class GitLogin extends Component {
       content = <Loading />;
 
     } else {
-      content = <Redirect to='/auth' />
+      content = <Redirect to='/team' />
     }
     return (
       <div>
