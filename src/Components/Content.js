@@ -11,6 +11,7 @@ import Loader from '../Common/Loading';
 import Placeholder from '../img/placeholder.png';
 import SettingModal from '../Common/InviteForm';
 import TeamModal from '../Common/TeamModal';
+import DeleteModal from '../Common/DeleteModal';
 class Content extends Component {
   constructor(props) {
     super(props)
@@ -25,7 +26,8 @@ class Content extends Component {
       openSettingModal: false,
       openAddTeamModal: false,
       inviteLink: '',
-      currentId: ''
+      currentId: '',
+      deleteModal: false
     }
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getPublicRooms.bind(this);
@@ -40,22 +42,36 @@ class Content extends Component {
     this.fetchMessage = this.fetchMessage.bind(this);
     this.joinRoomUsingLink = this.joinRoomUsingLink.bind(this);
     this.deleteRoom = this.deleteRoom.bind(this);
+
   }
 
   toggleGithubData() {
     this.setState({ showGithubData: !this.state.showGithubData });
   }
 
+  deleteRoomModal = () => {
+    this.setState({ deleteModal: !this.state.deleteModal });
+  }
+
   deleteRoom() {
-    const { currentRoom } = this.state;
+    this.setState({ deleteModal: !this.state.deleteModal });
+    const { currentRoom, currentUser } = this.state;
     console.log(currentRoom.id);
-    axios.post(`http://localhost:5000/api/room/delete/${currentRoom.id}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    if (currentRoom.createdByUserId === currentUser.id) {
+      axios.post(`https://ancient-temple-53657.herokuapp.com/api/room/delete/${currentRoom.id}`)
+        .then((res) => {
+          if (res.data.sucess === true) {
+            this.setState({ currentRoom: {} });
+            this.props.history.push({
+              pathname: '/team'
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+
   }
 
   updateRoomList() {
@@ -120,6 +136,7 @@ class Content extends Component {
 
   initialLoad() {
     let currenTeam;
+    console.log(this.props.match.params.id)
     const { rooms, hasRooms } = this.state;
     if (this.props.match.params.id == undefined) {
       return false;
@@ -127,7 +144,9 @@ class Content extends Component {
       if (hasRooms) {
         const index = _.findIndex(rooms, room => room.id == this.props.match.params.id);
         if (index == -1) {
-          return window.location.href = '/team';
+          return this.props.history.push({
+            pathname: '/team'
+          });
         }
         currenTeam = rooms[index];
         this.setState({ currentRoom: currenTeam });
@@ -301,6 +320,12 @@ class Content extends Component {
 
     return (
       <div className='app-layout'>
+        <DeleteModal
+          open={this.state.deleteModal}
+          close={this.deleteRoomModal}
+          deleteRoom={this.deleteRoom}
+          teamName={currentRoom.name}
+        />
         <TeamModal
           createTeam={this.createTeam}
           open={this.state.openAddTeamModal}
@@ -323,7 +348,7 @@ class Content extends Component {
 
               />
               <Header
-                deleteRoom={this.deleteRoom}
+                deleteRoom={this.deleteRoomModal}
                 creator={currentRoom.createdByUserId}
                 currentUser={currentUser.id}
                 team={currentRoom}
