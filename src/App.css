@@ -267,7 +267,7 @@ input {
   grid-template-rows: auto 1fr auto;
 }
 
-.header     { background-color: #f3f2f3;}
+.header1    { background-color: #f3f2f3;}
 .teams      { background-color:#ffffff; }
 .channels   { background-color: #1d5174; }
 .messages   { background-color:#f9f9fa; }
@@ -330,7 +330,7 @@ input {
   border-left: 5px solid #267aef;
 }
 
-.header {
+.header1 {
   grid-column: 2;
   grid-row: 1;
   color: #333;

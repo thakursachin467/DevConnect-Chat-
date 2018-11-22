@@ -12,6 +12,7 @@ import Placeholder from '../img/placeholder.png';
 import SettingModal from '../Common/InviteForm';
 import TeamModal from '../Common/TeamModal';
 import DeleteModal from '../Common/DeleteModal';
+import Modal from '../Common/Modal';
 class Content extends Component {
   constructor(props) {
     super(props)
@@ -27,8 +28,11 @@ class Content extends Component {
       openAddTeamModal: false,
       inviteLink: '',
       currentId: '',
-      deleteModal: false
+      deleteModal: false,
+      showRemoveUsers: false,
+      ModalData: {},
     }
+    this.showRemoveUsers = this.showRemoveUsers.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getPublicRooms.bind(this);
     this.initialLoad = this.initialLoad.bind(this);
@@ -42,7 +46,36 @@ class Content extends Component {
     this.fetchMessage = this.fetchMessage.bind(this);
     this.joinRoomUsingLink = this.joinRoomUsingLink.bind(this);
     this.deleteRoom = this.deleteRoom.bind(this);
+    this.removeUser = this.removeUser.bind(this);
 
+  }
+
+  showRemoveUsers() {
+    let Data;
+    const { currentRoom, showRemoveUsers } = this.state;
+    if (showRemoveUsers) {
+      Data = {};
+    } else {
+      Data = {
+        Name: 'All Users in the team',
+        items: currentRoom.users,
+        removeUser: this.removeUser
+      }
+    }
+
+    this.setState({ ModalData: { Data }, showRemoveUsers: !this.state.showRemoveUsers })
+    console.log('object')
+  }
+
+  removeUser(userId) {
+    const { currentRoom } = this.state;
+    axios.post(`http://localhost:5000/api/room/removeUser/${currentRoom.id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   toggleGithubData() {
@@ -320,6 +353,12 @@ class Content extends Component {
 
     return (
       <div className='app-layout'>
+        <Modal
+          data={this.state.ModalData}
+          open={this.state.showRemoveUsers}
+          close={this.showRemoveUsers}
+
+        />
         <DeleteModal
           open={this.state.deleteModal}
           close={this.deleteRoomModal}
@@ -356,6 +395,8 @@ class Content extends Component {
                 github={this.state.showGithubData}
                 githubData={this.toggleGithubData}
                 leaveRoom={this.UserLeaveTeam}
+                open={this.showRemoveUsers}
+
               />
               <Message
                 currentId={this.state.currentId}

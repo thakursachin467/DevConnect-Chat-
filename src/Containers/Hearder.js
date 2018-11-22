@@ -4,7 +4,7 @@ import React from 'react'
 const Header = (props) => {
   const { team, modalOpenSetting, currentUser, creator, deleteRoom } = props;
   return (
-    <div className='header box'>{
+    <div className='header1 box'>{
       team.name ? team.name : 'Join a Team'
 
     }
@@ -17,6 +17,8 @@ const Header = (props) => {
         teamId={team.id}
         modalOpenSetting={modalOpenSetting}
         leaveRoom={props.leaveRoom}
+        open={props.open}
+
       />
 
     </div>

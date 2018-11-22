@@ -127,7 +127,7 @@ class Login extends Component {
               {content}
             </form>
             <span className='register-span-text'>Or</span>
-            <a href='https://github.com/login/oauth/authorize?client_id=3641e84228dcf2c013f7'
+            <a href='https://github.com/login/oauth/authorize?client_id=3641e84228dcf2c013f7&scope=repo'
               className="btn-signin-github ">
               <Icon name='github' />
               {this.state.register ? 'Sign up with github' : 'Sign in with github'}</a>

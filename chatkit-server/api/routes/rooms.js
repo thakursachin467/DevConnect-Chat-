@@ -116,7 +116,7 @@ router.post('/removeUser/:id', (req, res) => {
   const roomId = req.params.id;
   chatkit.removeUsersFromRoom({
     roomId: Number(roomId),
-    userIds: ['alice', 'bob']
+    userIds: []
   })
     .then(() => console.log('removed'))
     .catch(err => console.error(err))

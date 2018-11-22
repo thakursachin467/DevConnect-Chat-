@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+
 
 const DropdownTriggerExample = (props) => {
   const options = [
@@ -14,7 +14,7 @@ const DropdownTriggerExample = (props) => {
       disabled: true,
     },
     { key: 'profile', text: 'Your Profile', icon: 'user' },
-    //{ key: 'stars', text: 'Your Stars' },
+    { key: 'stars', text: 'Your Repository', icon: 'folder' },
     //{ key: 'explore', text: 'Explore' },
     //{ key: 'integrations', text: 'Integrations' },
     //{ key: 'help', text: 'Help' },
