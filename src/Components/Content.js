@@ -5,7 +5,7 @@ import User from '../Containers/Users';
 import Header from '../Containers/Hearder';
 import Input from '../Containers/InputBox';
 import axios from 'axios';
-import { ChatManager, TokenProvider } from '@pusher/chatkit'
+import { ChatManager, TokenProvider } from '@pusher/chatkit';
 import _ from 'lodash';
 import Loader from '../Common/Loading';
 import Placeholder from '../img/placeholder.png';
@@ -64,17 +64,19 @@ class Content extends Component {
     }
 
     this.setState({ ModalData: { Data }, showRemoveUsers: !this.state.showRemoveUsers })
-    console.log('object')
   }
 
   removeUser(userId) {
     const { currentRoom } = this.state;
-    axios.post(`http://localhost:5000/api/room/removeUser/${currentRoom.id}`)
+    axios.post(`https://ancient-temple-53657.herokuapp.com/api/room/removeUser/${currentRoom.id}`, {
+      userId: userId
+    })
       .then((res) => {
-        console.log(res);
+        this.showRemoveUsers();
+        this.props.notify('User Succesfully Deleted!!!');
       })
       .catch((err) => {
-        console.log(err)
+        this.showRemoveUsers();
       })
   }
 
@@ -94,6 +96,7 @@ class Content extends Component {
       axios.post(`https://ancient-temple-53657.herokuapp.com/api/room/delete/${currentRoom.id}`)
         .then((res) => {
           if (res.data.sucess === true) {
+            this.props.notify('Room successfully Deleted!!!');
             this.setState({ currentRoom: {} });
             this.props.history.push({
               pathname: '/team'
@@ -112,9 +115,10 @@ class Content extends Component {
   }
 
   UserLeaveTeam(teamId) {
-    const { currentUser } = this.state;
+    const { currentUser, currentRoom } = this.state;
     currentUser.leaveRoom({ roomId: Number(teamId) })
       .then(room => {
+        this.props.notify(`You left ${currentRoom.name}`);
         this.updateRoomList();
         this.setState({ currentRoom: {} });
 
@@ -168,6 +172,7 @@ class Content extends Component {
   }
 
   initialLoad() {
+    this.props.notify(`Welcome back ${this.state.currentUser.name}`);
     let currenTeam;
     console.log(this.props.match.params.id)
     const { rooms, hasRooms } = this.state;
@@ -199,6 +204,7 @@ class Content extends Component {
       private: true,
     }).then(room => {
       console.log(`Created room called ${currentUser.rooms}`)
+      this.props.notify(`Created room called ${room.name}`);
       this.updateRoomList();
     })
       .catch(err => {
@@ -208,7 +214,7 @@ class Content extends Component {
   }
 
   componentDidMount() {
-
+    this.props.notify(`Successfully Logged in as ${this.props.currentUser}`);
     const chatManager = new ChatManager({
       instanceLocator: 'v1:us1:3dd62a71-d604-4985-bbb9-5965ea8bb128',
       userId: this.props.currentUser,
@@ -218,9 +224,11 @@ class Content extends Component {
     chatManager
       .connect({
         onAddedToRoom: room => {
+          this.props.notify(`You have been added to ${room.name}`);
           this.updateRoomList();
         },
         onRemovedFromRoom: room => {
+          this.props.notify(`You have been removed from  ${room.name}`);
           this.updateRoomList();
         },
         onRoomUpdated: room => {
@@ -280,6 +288,7 @@ class Content extends Component {
 
   }
 
+
   openAddTeamModal() {
     this.setState({ openAddTeamModal: !this.state.openAddTeamModal });
   }
@@ -305,6 +314,9 @@ class Content extends Component {
       roomId: roomId,
       hooks: {
         onNewMessage: message => {
+          /* if (message.senderId !== this.state.currentUser.id) {
+             this.props.notify('New Message Received');
+           } */
           if (message.roomId === this.state.currentRoom.id) {
             this.setState({
               Messages: [...this.state.Messages, message]
@@ -317,9 +329,11 @@ class Content extends Component {
           console.log(`User ${user.name} started typing`)
         },
         onUserJoined: user => {
+          this.props.notify(`${user.id} just joined the room`);
           this.initialLoad();
         },
         onUserLeft: user => {
+          this.props.notify(`${user.id} just left the room`);
           this.initialLoad();
         },
         onNewReadCursor: cursor => {
