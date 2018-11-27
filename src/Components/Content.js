@@ -265,7 +265,7 @@ class Content extends Component {
     })
       .then(messages => {
 
-        this.setState({ Messages: [...messages, ...this.state.Messages], currentId: messages[9].id });
+        this.setState({ Messages: [...messages, ...this.state.Messages], currentId: messages[messages.length - 1].id });
 
       })
       .catch(err => {
@@ -288,7 +288,7 @@ class Content extends Component {
 
   }
 
-
+  updateCurrentRoom = () => { this.setState({ currentRoom: this.state.currentRoom }) }
   openAddTeamModal() {
     this.setState({ openAddTeamModal: !this.state.openAddTeamModal });
   }
@@ -330,11 +330,11 @@ class Content extends Component {
         },
         onUserJoined: user => {
           this.props.notify(`${user.id} just joined the room`);
-          this.initialLoad();
+          this.updateCurrentRoom();
         },
         onUserLeft: user => {
           this.props.notify(`${user.id} just left the room`);
-          this.initialLoad();
+          this.updateCurrentRoom();
         },
         onNewReadCursor: cursor => {
           console.log(cursor)

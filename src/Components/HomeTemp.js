@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../img/logo2.png';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 class HomeTemp extends React.Component {
   state = {
@@ -57,6 +58,7 @@ class HomeTemp extends React.Component {
           <img src={Logo} alt='Logo' height='250px' width='250px' />
           <p>A Reat Time Chat Team app for developers and Programmers</p>
           <h1 className='comingoon'>Coming Soon</h1>
+          <Link className='beta' to='/auth'>Join beta</Link>
           {countdown}
 
         </div>

@@ -654,11 +654,18 @@ thanks to loading.io
   color: white;
 }
 
+.beta{
+  font-size: 40px;
+  color: white;
+ 
+}
+
 .landing-temp p{
   font-size: 20px;
   color: white;
 }
 .countdown{
+  margin-top: 20px;
   font-size: 50px;
   color: white;
   display: flex;
