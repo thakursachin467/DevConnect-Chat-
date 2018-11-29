@@ -228,7 +228,6 @@ class Content extends Component {
           this.updateRoomList();
         },
         onRemovedFromRoom: room => {
-          this.props.notify(`You have been removed from  ${room.name}`);
           this.updateRoomList();
         },
         onRoomUpdated: room => {
@@ -264,9 +263,7 @@ class Content extends Component {
       limit: 10,
     })
       .then(messages => {
-
         this.setState({ Messages: [...messages, ...this.state.Messages], currentId: messages[messages.length - 1].id });
-
       })
       .catch(err => {
         console.log(`Error fetching messages: ${err}`)

@@ -228,9 +228,12 @@ input {
 
 
 .Current-User .message-body{
+  border-top-left-radius: 12px;
   background: #86BB71;
   color: #f3f2f3;
 }
+
+
 
 .Other-user .message-body{
   background: #94C2ED;
