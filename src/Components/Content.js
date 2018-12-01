@@ -31,6 +31,8 @@ class Content extends Component {
       deleteModal: false,
       showRemoveUsers: false,
       ModalData: {},
+      userRepos: {},
+      showRepos: false
     }
     this.showRemoveUsers = this.showRemoveUsers.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
@@ -78,6 +80,16 @@ class Content extends Component {
       .catch((err) => {
         this.showRemoveUsers();
       })
+  }
+
+  fetchReps = () => {
+    const { currentUser } = this.state;
+    const id = currentUser.id;
+    axios.get(`http://localhost:5000/api/githubs/all/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   }
 
   toggleGithubData() {
