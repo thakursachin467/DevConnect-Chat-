@@ -87,7 +87,7 @@ class Content extends Component {
     const id = currentUser.id;
     axios.get(`http://localhost:5000/api/githubs/all/${id}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -230,7 +230,7 @@ class Content extends Component {
     const chatManager = new ChatManager({
       instanceLocator: 'v1:us1:3dd62a71-d604-4985-bbb9-5965ea8bb128',
       userId: this.props.currentUser,
-      tokenProvider: new TokenProvider({ url: 'https://ancient-temple-53657.herokuapp.com/api/auth/authenticate' })
+      tokenProvider: new TokenProvider({ url: 'http://localhost:5000/api/auth/authenticate' })
     });
 
     chatManager
