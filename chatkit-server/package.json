@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A server for chatkit app",
   "main": "app.js",
- "engines": {
+  "engines": {
     "node": "10.3.0"
   },
   "scripts": {
@@ -15,10 +15,12 @@
   "license": "MIT",
   "dependencies": {
     "@pusher/chatkit-server": "^1.0.4",
+    "@sentry/node": "^4.6.4",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
+    "event-stream": "^3.3.4",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "mongoose": "^5.2.8",
