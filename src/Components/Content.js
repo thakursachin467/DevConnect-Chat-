@@ -13,6 +13,8 @@ import SettingModal from '../Common/InviteForm';
 import TeamModal from '../Common/TeamModal';
 import DeleteModal from '../Common/DeleteModal';
 import Modal from '../Common/Modal';
+import * as Sentry from '@sentry/browser';
+
 class Content extends Component {
   constructor(props) {
     super(props)
@@ -78,6 +80,8 @@ class Content extends Component {
         this.props.notify('User Succesfully Deleted!!!');
       })
       .catch((err) => {
+        Sentry.captureException(err);
+        this.props.notify('Something went wrong!');
         this.showRemoveUsers();
       })
   }
@@ -89,8 +93,8 @@ class Content extends Component {
       .then((res) => {
         console.log(res.data);
       })
-      .catch((err) => console.log(err));
-  }
+      .catch((err) => Sentry.captureException(err));
+  };
 
   toggleGithubData() {
     this.setState({ showGithubData: !this.state.showGithubData });
@@ -116,7 +120,7 @@ class Content extends Component {
           }
         })
         .catch((err) => {
-          console.log(err);
+          Sentry.captureException(err)
         })
     }
 
@@ -137,7 +141,8 @@ class Content extends Component {
 
       })
       .catch(err => {
-        console.log(`Error leaving room ${teamId}: ${err}`)
+        Sentry.captureException(err);
+        this.props.notify(`Error leaving room ${teamId}: ${err}`);
       })
   }
 
@@ -148,10 +153,11 @@ class Content extends Component {
       roomId: currentRoom.id
     })
       .then(messageId => {
-        this.setState({ message: '' })
+        this.setState({ message: '' });
         console.log(`Added message to ${currentRoom.name}`)
       })
       .catch(err => {
+        Sentry.captureException(err);
         console.log(`Error adding message to ${currentRoom.name}: ${err}`)
       })
   }
@@ -177,6 +183,7 @@ class Content extends Component {
 
       })
       .catch((err) => {
+        Sentry.captureException(err);
         console.log(err);
       })
 
@@ -220,6 +227,7 @@ class Content extends Component {
       this.updateRoomList();
     })
       .catch(err => {
+        Sentry.captureException(err);
         console.log(`Error creating room ${err}`)
       })
 
@@ -262,6 +270,7 @@ class Content extends Component {
         console.log('Successful connection', currentUser.rooms)
       })
       .catch(err => {
+        Sentry.captureException(err);
         console.log('Error on connection', err)
       })
   }
@@ -278,6 +287,7 @@ class Content extends Component {
         this.setState({ Messages: [...messages, ...this.state.Messages], currentId: messages[messages.length - 1].id });
       })
       .catch(err => {
+        Sentry.captureException(err);
         console.log(`Error fetching messages: ${err}`)
       })
   }
@@ -292,6 +302,7 @@ class Content extends Component {
         this.setState({ inviteLink: res.data.token });
       })
       .catch((err) => {
+        Sentry.captureException(err);
         console.log(err)
       })
 
@@ -353,9 +364,6 @@ class Content extends Component {
         },
         onPresenceChanged: (state, user) => {
           console.log(`User ${user.name} is ${state.current}`)
-        },
-        onNewReadCursor: cursor => {
-          console.log(cursor);
         }
       },
       messageLimit: 15

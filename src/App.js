@@ -10,7 +10,11 @@ import Logout from './Components/Logout';
 import InviteHandler from './Containers/InviteLink';
 import { ToastContainer, toast } from 'react-toastify';
 import './App.css';
+import * as Sentry from '@sentry/browser';
 
+Sentry.init({
+  dsn: "https://21d5dbfe8d0a4438a56a24d340f4a113@sentry.io/1411859"
+ });
 
 if (localStorage.authtoken) {
   const userData = jwt_decode(localStorage.authtoken);
