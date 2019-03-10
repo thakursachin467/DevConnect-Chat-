@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Loader from '../Common/Loader';
+import * as Sentry from '@sentry/browser';
 
 class InviteHandler extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class InviteHandler extends Component {
         this.setState({ loading: false });
       })
       .catch((err) => {
-        console.log(err);
+        Sentry.captureException(err);
       })
 
   }

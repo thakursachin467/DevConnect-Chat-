@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 
 class Message extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.scrollToBottom = this.scrollToBottom.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.myRef = React.createRef();

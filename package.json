@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@pusher/chatkit": "^0.7.18",
+    "@sentry/browser": "^4.6.4",
     "axios": "^0.18.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
