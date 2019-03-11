@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t thakursachin467/react-test-image -f ./Dockerfile.dev .
+script:
+  - docker run thakursachin467/react-test-image npm test -- --coverage
+
+after_success:
+  - docker build -t thakursachin467/Devconnect-client- .
+  - docker build -t thakursachin467/Devconnect-nginx-  ./nginx
+  - docker build -t thakursachin467/Devconnect-server- ./chatkit-server
+  # login to the docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_EMAIL" --password-stdin
+  # now tak all these images and push them to docker hub.
+  - docker push thakursachin467/Devconnect-client-
+  - docker push thakursachin467/Devconnect-nginx-
+  - docker push thakursachin467/Devconnect-server-
+
+
+
+
