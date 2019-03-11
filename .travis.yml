@@ -13,9 +13,9 @@ after_success:
   # login to the docker cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_EMAIL" --password-stdin
   # now tak all these images and push them to docker hub.
-  - docker push thakursachin467/devconnect-client-
-  - docker push thakursachin467/devconnect-nginx-
-  - docker push thakursachin467/devconnect-server-
+  - docker push thakursachin467/devconnect-client
+  - docker push thakursachin467/devconnect-nginx
+  - docker push thakursachin467/devconnect-server
 
 
 
