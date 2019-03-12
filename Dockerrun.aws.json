@@ -1,0 +1,31 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "ContainerDefinations": [
+    {
+      "name": "Devconnect-client",
+      "image": "thakursachin467/devconnect-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "Devconnect-server",
+      "image": "thakursachin467/devconnect-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "Devconnect-nginx",
+      "image": "thakursachin467/devconnect-nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "Devconnect-client","Devconnect-server"
+      ]
+    }
+  ]
+}
