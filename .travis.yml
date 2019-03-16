@@ -17,6 +17,21 @@ after_success:
   - docker push thakursachin467/devconnect-nginx
   - docker push thakursachin467/devconnect-server
 
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: Devconnect-chat
+  env: DevconnectChat-env
+  bucket_name: elasticbeanstalk-us-east-2-456128121975
+  bucket_path: devconnect-chat
+  on:
+    branch: master
+  access_key_id: $Access_key_ID
+  secret_access_key:
+    secure: $Secret_access_key
+
+
+
 
 
 

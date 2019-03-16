@@ -1,2 +1,6 @@
 /node_modules
 /chatkit-server
+docker-compose.yml
+Dockerfile.dev
+Dockerrun.aws.json
+.travis.yml
