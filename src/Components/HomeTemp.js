@@ -10,7 +10,7 @@ class HomeTemp extends React.Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       let distance;
-      const launchDate = new Date('Dec 1 2018 12:00:00').getTime()
+      const launchDate = new Date('Dec 1 2018 12:00:00').getTime();
       const today = new Date().getTime()
       distance = launchDate - today;
       this.setState({ distance: distance })

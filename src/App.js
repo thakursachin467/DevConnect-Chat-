@@ -16,19 +16,21 @@ Sentry.init({
   dsn: "https://21d5dbfe8d0a4438a56a24d340f4a113@sentry.io/1411859"
  });
 
-if (localStorage.authtoken) {
-  const userData = jwt_decode(localStorage.authtoken);
+if (typeof window !== 'undefined') {
+  if (localStorage.authtoken) {
+    const userData = jwt_decode(localStorage.authtoken);
 
-  /**
-   * ? check for expired user
-   */
-  const currentTime = Date.now() / 1000;
-  if (userData.exp < currentTime) {
-    localStorage.removeItem('authtoken');
     /**
-     * ? redirect to login
+     * ? check for expired user
      */
-    window.location.href = "/auth";
+    const currentTime = Date.now() / 1000;
+    if (userData.exp < currentTime) {
+      localStorage.removeItem('authtoken');
+      /**
+       * ? redirect to login
+       */
+      window.location.href = "/auth";
+    }
   }
 }
 
