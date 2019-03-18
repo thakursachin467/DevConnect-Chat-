@@ -13,7 +13,7 @@
 # production
 /build
 
-/docker-compose.yml
+docker-compose.yml
 # misc
 .DS_Store
 .env.local
