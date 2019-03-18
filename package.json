@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start-dev": "concurrently \"react-scripts start\" \"node ./chatkit-server/app.js\"  "
+    "start-dev": "concurrently \"react-scripts start\" \"node ./DevConnect-chat-server/app.js\"  "
   },
   "devDependencies": {
     "concurrently": "^4.0.1"

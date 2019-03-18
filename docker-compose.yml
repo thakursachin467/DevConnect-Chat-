@@ -16,10 +16,10 @@ services:
   api:
     build:
       dockerfile: Dockerfile.dev
-      context: ./chatkit-server
+      context: DevConnect-chat-server
     volumes:
       - /app/node_modules
-      - ./chatkit-server:/app
+      - ./DevConnect-chat-server:/app
     environment:
       - CHATKIT_KEY=9afdfeff-5567-44d3-a4f7-1151f41f3b9c:oNwWBHRK1qrpXjZBMQmyw0I1iSg/l34bhLEI9AU6/2w=
       - PORT=5000

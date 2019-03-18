@@ -1,5 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# server repository is separated into an its own independent repository
+/DevConnect-chat-server
+
 
 # dependencies
 /node_modules
@@ -10,6 +13,7 @@
 # production
 /build
 
+/docker-compose.yml
 # misc
 .DS_Store
 .env.local
