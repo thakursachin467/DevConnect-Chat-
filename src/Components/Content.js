@@ -5,7 +5,7 @@ import User from '../Containers/Users';
 import Header from '../Containers/Hearder';
 import Input from '../Containers/InputBox';
 import axios from 'axios';
-import { ChatManager, TokenProvider } from '@pusher/chatkit';
+import { ChatManager, TokenProvider } from '@pusher/chatkit-client'
 import _ from 'lodash';
 import Loader from '../Common/Loading';
 import Placeholder from '../img/placeholder.png';
@@ -277,7 +277,7 @@ class Content extends Component {
 
   fetchMessage(messageId) {
     const { currentUser, currentRoom } = this.state;
-    currentUser.fetchMessages({
+    currentUser.fetchMultipartMessages({
       roomId: currentRoom.id,
       initialId: Number(messageId),
       direction: 'older',
@@ -329,11 +329,12 @@ class Content extends Component {
   }
 
   subscribeToRoom(roomId, roomName) {
+    console.log(roomId,roomName);
     this.setState({ Messages: [], currentRoom: roomName });
-    this.currentUser.subscribeToRoom({
+    this.currentUser.subscribeToRoomMultipart({
       roomId: roomId,
       hooks: {
-        onNewMessage: message => {
+        onMessage: message => {
           /* if (message.senderId !== this.state.currentUser.id) {
              this.props.notify('New Message Received');
            } */
@@ -431,7 +432,7 @@ class Content extends Component {
               />
               <Message
                 currentId={this.state.currentId}
-                users={currentRoom.users}
+                users={currentRoom.userStore}
                 message={this.state.Messages}
                 User={this.props.currentUser}
                 fetchMessage={this.fetchMessage}
@@ -447,7 +448,7 @@ class Content extends Component {
 
             : (
               <div>
-                <img src={Placeholder} height='250px' width='180px' style={{ marginLeft: '50%', marginRight: 'auto', display: 'block', marginTop: '24%', marginLeft: '54%' }} />
+                <img src={Placeholder} height='250px' width='180px' style={{  marginRight: 'auto', display: 'block', marginTop: '24%', marginLeft: '54%' }} />
                 <h3 style={{ marginLeft: '60%', marginRight: 'auto', display: 'block', marginTop: '2%' }} >Or</h3>
                 <button
                   className='joinTeamBtn'

@@ -42,15 +42,15 @@ class Message extends Component {
     let loading = true;
     let usersObject = {};
     const { users, User } = this.props;
-    usersObject = users.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.avatarURL }), {});
-    const presenceStore = users[0].presenceStore.store;
-
+    usersObject = users.users;
+    console.log(this.props.message);
+    const presenceStore = users.presenceStore;
     if (this.props.message.length > 0) {
       loading = false;
 
     }
     if (loading) {
-      return (<div className="lds-hourglass" style={{ alignSelf: 'center', margin: 'auto' }}></div>)
+      return (<div  style={{ alignSelf: 'center', margin: 'auto' }}>No Message Found</div>)
     }
     const calendarStrings = {
       lastDay: '[Yesterday at] LT',

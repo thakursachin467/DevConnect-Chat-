@@ -1,0 +1,224 @@
+.landing_page_body{
+    background-color: #252529;
+    margin: 0;
+    color: #fff;
+    line-height: 1.6;
+}
+
+nav {
+    height: 60px;
+    width: 100%;
+    background-color: #332e2a;
+    color: #eceed4;
+}
+nav ul {
+    padding: 0;
+    margin: 0;
+}
+nav li {
+    margin: 10px;
+    display: inline;
+    float: left;
+}
+nav a {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 0;
+    color: #eee;
+    text-decoration: none;
+}
+nav li:hover {
+    background-color: #444;
+}
+
+
+
+.Landing_page_1{
+    background-color:rgba(0, 0, 0, 0.5);
+    margin: 0;
+    padding: 0;
+    background: url("../../Images/ShowCase.jpg") no-repeat center/cover;
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.container h1{
+    font-size: 4rem;
+    margin-bottom: 0;
+}
+.container h2{
+    font-size: 2rem;
+
+}
+.lead{
+    font-size: 1.3rem;
+}
+
+.container{
+    color: white;
+    margin-top:25vh;
+    text-align: center;
+    padding: 0 3rem;
+}
+.container_section{
+    font-size: 2rem;
+    text-align: center;
+    padding: 0 3rem;
+}
+
+.Mock_UP,
+.MockUpImg,
+.MackBookAirMockup{
+    width: 100%;
+}
+.feature_tab h2{
+    font-size: 2rem;
+}
+.feature_tab .text_secondry{
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+.text_center{
+    text-align: center;
+}
+
+footer .footer_colmn{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(4,1fr);
+    padding: 2rem;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.footer_bottom{
+    padding: 1rem;
+}
+
+footer .footer_colmn ul{
+    list-style: none;
+}
+
+.light_bg{
+    background: white;
+    color: #333;
+}
+
+.feature_tabs_{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+}
+
+.MockUpImg{
+    margin-top: 3rem;
+}
+
+.section{
+    padding: 2rem 0;
+    font-size: 2rem;
+}
+
+.mb{
+    margin-bottom: 1rem;
+}
+.mt{
+    margin-top: 1rem;
+}
+.section_head{
+    font-size: 2rem;
+    margin: 0;
+}
+
+.btn_primary{
+    background-color: #3b38ee;
+}
+
+.btn_secondry{
+    background-color: #3f89ee;
+}
+
+.btn_secondry:hover{
+    background-color: #289aee;
+    cursor: pointer;
+}
+
+.txt_secorndry{
+    color: #6f7873;
+}
+.txt_primary{
+    color: white;
+}
+
+.mb-3{
+    margin-bottom: 3rem;
+}
+
+.mt-2{
+    margin-top: 2rem;
+}
+
+.btn_primary:hover{
+    background-color: #525cee;
+    color:black;
+    cursor: pointer;
+}
+
+.text_light{
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.btn{
+    font-size: 1rem;
+    text-decoration: none;
+    color: rgba(225, 238, 159, 1);
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+
+@media screen and (max-width: 780px){
+    .feature_tabs_{
+        grid-template-columns: 1fr;
+    }
+
+    footer .footer_colmn{
+        display: none;
+    }
+}
+
+@media screen and (max-height: 580px){
+    .hide{
+        display: none;
+    }
+}
+
+
+@media screen and (max-width:580px ){
+    .hide{
+        display: none;
+    }
+
+    .Landing_page_1{
+        height: 50vh;
+    }
+    .container{
+        margin-top: 15vh;
+    }
+    .container h1{
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+    .container h2{
+        font-size: 1rem;
+
+    }
+}
+

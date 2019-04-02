@@ -5,7 +5,7 @@ import GitLogin from './Components/Auth/GitLogin';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import PrivateRoute from './Components/PrivateRoute';
-import HomeTemp from './Components/HomeTemp';
+import HomeTemp from './Components/Home/HomeTemp';
 import Logout from './Components/Logout';
 import InviteHandler from './Containers/InviteLink';
 import { ToastContainer, toast } from 'react-toastify';
