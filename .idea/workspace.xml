@@ -4,8 +4,7 @@
     <list default="true" id="b6d5d080-eb8d-422b-b508-5bea9bf34860" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DevConnect-chat-server/Config/chatkit.js" beforeDir="false" afterPath="$PROJECT_DIR$/DevConnect-chat-server/Config/chatkit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/default.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Images/ShowCase.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Images/ShowCase.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Home/HomeTemp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Home/HomeTemp.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,10 +21,13 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/nginx/default.conf">
+        <entry file="file://$PROJECT_DIR$/src/Components/Home/HomeTemp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+            <state relative-caret-position="632">
+              <caret line="36" column="146" selection-start-line="36" selection-start-column="146" selection-end-line="36" selection-end-column="146" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,9 +91,9 @@
         <option value="$PROJECT_DIR$/src/Components/Content.js" />
         <option value="$PROJECT_DIR$/src/Containers/MessageList.js" />
         <option value="$PROJECT_DIR$/src/Containers/Message.js" />
-        <option value="$PROJECT_DIR$/src/Components/Home/HomeTemp.js" />
         <option value="$PROJECT_DIR$/src/Components/Home/Home.css" />
         <option value="$PROJECT_DIR$/nginx/default.conf" />
+        <option value="$PROJECT_DIR$/src/Components/Home/HomeTemp.js" />
       </list>
     </option>
   </component>
@@ -107,7 +109,35 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="chatkit-demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chatkit-demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chatkit-demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chatkit-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chatkit-demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chatkit-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chatkit-demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chatkit-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -199,6 +229,8 @@
       <workItem from="1554183505630" duration="5287000" />
       <workItem from="1554200498019" duration="897000" />
       <workItem from="1554209886280" duration="555000" />
+      <workItem from="1554479606382" duration="80000" />
+      <workItem from="1556532756427" duration="521000" />
     </task>
     <servers />
   </component>
@@ -226,7 +258,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35239000" />
+    <option name="totallyTimeSpent" value="35840000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -241,7 +273,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49937108" visible="true" weight="0.2496464" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49937108" visible="true" weight="0.2496464" />
       <window_info id="Structure" order="1" sideWeight="0.50062895" side_tool="true" weight="0.2496464" />
       <window_info id="npm" order="2" sideWeight="0.50062895" side_tool="true" weight="0.2496464" />
       <window_info id="Favorites" order="3" sideWeight="0.50062895" side_tool="true" weight="0.2496464" />
@@ -255,7 +287,7 @@
       <window_info anchor="bottom" id="Docker" order="7" weight="0.84402514" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.95220125" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.9484277" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32955974" />
       <window_info anchor="bottom" id="Quokka" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -576,16 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Home/HomeTemp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="37" column="71" selection-start-line="37" selection-start-column="71" selection-end-line="37" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nginx/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -611,6 +633,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Home/HomeTemp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="632">
+          <caret line="36" column="146" selection-start-line="36" selection-start-column="146" selection-end-line="36" selection-end-column="146" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

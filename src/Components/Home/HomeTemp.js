@@ -34,7 +34,7 @@ class HomeTemp extends React.Component {
                             <h3>What’s new</h3>
                             <p className="lead">Project discussions, important documents, Github repo integration. All your team and work at a single place.Designed for community collaboration
                                 We  provide integrations with GitHub.</p>
-                            <Link to="/" className="btn btn_primary mb">Get DevConnect Now</Link>
+                            <a href="https://s3.ap-south-1.amazonaws.com/calcichat-deployments-mobilehub-1003278389/DevConnect.apk" target='_blank'  className="btn btn_primary mb" >Get DevConnect Now</a>
                             <p className="text_light txt_secorndry mt-2">DevConnect-Chat is available for Android and Web.</p>
                             <img src={MockUp} className="Mock_UP" alt="Mockup"/>
                         </div>
